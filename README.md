@@ -1,10 +1,10 @@
 # NSA_Advice__huangT-linW-sontagC-zenH
 
 ROSTER
-Tyler Huang: Back end\n
-William Lin: Project Manager\n
-Coby Sontag: Back end\n
-Hilary Zen: Front end\n
+- Tyler Huang: Back end
+- William Lin: Project Manager
+- Coby Sontag: Back end
+- Hilary Zen: Front end
 
 WEBSITE
 - An interface where users can enter their information to receive information
