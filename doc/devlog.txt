@@ -1,2 +1,6 @@
 TEAM: NSA_Advice
 Members: William Lin, David Sontag, Hilary Zen, Tyler Huang
+
+williamL -- 2019-11-20 8:49
+- updated the design doc to show what front-end framework we're using
+- cleared up some ambiguity in variable naming and placeholders
