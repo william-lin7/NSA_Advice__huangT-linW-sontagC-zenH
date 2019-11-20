@@ -4,3 +4,7 @@ Members: William Lin, David Sontag, Hilary Zen, Tyler Huang
 williamL -- 2019-11-20 8:49
 - updated the design doc to show what front-end framework we're using
 - cleared up some ambiguity in variable naming and placeholders
+
+tylerH -- 2019-11-20 8:50
+- created app.py file and added requirements.txt file
+- added the root function and home function
