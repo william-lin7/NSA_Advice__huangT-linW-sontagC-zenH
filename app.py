@@ -4,7 +4,7 @@
 #P #01: ArRESTed Development
 #2019-11-2-
 
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 app = Flask(__name__)
 app.secret_key = "adsfgt"
@@ -17,6 +17,14 @@ def root():
         return redirect(url_for("home"))
     else:
         return render_template("index.html")
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/register")
+def register():
+    return render_template("register.html")
 
 @app.route("/home")
 def home(): #display home page of website

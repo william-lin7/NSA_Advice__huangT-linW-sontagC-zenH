@@ -8,3 +8,5 @@ williamL -- 2019-11-20 8:49
 tylerH -- 2019-11-20 8:50
 - created app.py file and added requirements.txt file
 - added the root function and home function
+- added login route and register route
+- edited index html to have get the form action
