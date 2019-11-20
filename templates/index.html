@@ -27,8 +27,12 @@
 
       <div class="middle-content-section">
         <h1 class="webName">Welcome to NSA Advice!</h1>
-        <button class="button large">Login</button>
-        <button class="button large">Register</button>
+        <form action="/login" method="GET">
+          <button class="button large" type="submit" value="login" >Login</button>
+        </form>
+        <form action="/register" method="GET">
+          <button class="button large" type="submit" value="register">Register</button>
+        </form>
       </div>
 
       <div class="bottom-content-section" data-magellan data-threshold="0">
