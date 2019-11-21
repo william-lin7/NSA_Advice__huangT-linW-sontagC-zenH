@@ -38,7 +38,28 @@ def auth():
             flash("ERROR! Passwords do not match")
             flash("invalid error")
             return redirect(url_for("register"))
-            return 0
+        else:
+            dbfile = "holding.db"
+            db = sqlite3.connect(dbfile)
+            c = db.cursor() #above three lines allow sqlite commands to be performed from python script
+            command = "SELECT username FROM users WHERE username = \"{}\";"
+            listUsers = c.execute(command.format(request.form['username'])) #fills in brackets with the given username and executes it in sqlite
+            bar = list(enumerate(listUsers))
+            if len(bar) > 0: #checks whether there exists a user with the given username
+                getPass = "SELECT password FROM users WHERE username = \"{}\";"
+                listPass = c.execute(getPass.format(bar[0][1][0]))
+                for p in listPass:
+                    if request.form['password'] == p[0]: #correct username and password
+                        session['user'] = request.form['username'] #stores the user in the session
+                        return redirect(url_for("home"))
+                    else:
+                        flash("ERROR! Incorrect password")
+                        flash("invalid error")
+                        return redirect(url_for("root"))
+            else:
+                flash("ERROR! Incorrect username")
+                flash("invalid error")
+                return redirect(url_for("register"))
 
 @app.route("/home")
 def home(): #display home page of website
