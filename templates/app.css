@@ -65,4 +65,18 @@
 .webName{
   color:#000000;
   font-weight: bold;
+<<<<<<< HEAD
+=======
+}
+
+.login-box {
+  width: 40vw;
+  margin-left: 30vw;
+}
+
+.login-box-submit-button {
+  width: 100%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+>>>>>>> af6d72ebf621cb794097e81e84f6856d066ebde8
 }
