@@ -26,11 +26,9 @@
 
       <div class="middle-content-section">
         <h1 class="webName">Welcome to NSA Advice!</h1>
-        <form action="/login" method="GET">
-          <button class="button large" type="submit" value="login" >Login</button>
-        </form>
-        <form action="/register" method="GET">
-          <button class="button large" type="submit" value="register">Register</button>
+        <form action="/auth" method="POST">
+          <input type="submit" class="button large" name = "submit_button" value="Login">
+          <input type="submit" class="button large" name = "submit_button" value="Register">
         </form>
       </div>
 

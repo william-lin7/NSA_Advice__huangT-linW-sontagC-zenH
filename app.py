@@ -4,7 +4,8 @@
 #P #01: ArRESTed Development
 #2019-11-2-
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request,  session, redirect, url_for, flash
+import sqlite3
 app = Flask(__name__)
 app = Flask(__name__)
 app.secret_key = "adsfgt"
@@ -18,13 +19,13 @@ def root():
     else:
         return render_template("index.html")
 
-@app.route("/login")
-def login():
-    return render_template("login.html")
-
-@app.route("/register")
-def register():
-    return render_template("register.html")
+@app.route("/auth", methods = ["POST"])
+def auth():
+    print(request.form)
+    if (request.form['submit_button'] == 'Login'):
+        return render_template("login.html")
+    elif (request.form['submit_button'] == 'Register'):
+        return render_template("register.html")
 
 @app.route("/home")
 def home(): #display home page of website

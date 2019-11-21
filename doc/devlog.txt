@@ -17,3 +17,6 @@ hilaryZ -- 2019-11-21 4:52
 - The article explained very clearly why it can be so difficult to ask for help and debug code in groups. We were shocked by the examples throughout the text that showed how new programmers working together could quickly surpass others who worked alone, even though they had years of experience.
 - We learned that it isn’t enough to just have one person check code, since they also become attached to the debugging work they have done. To be most effective, even though all of us are focusing on separate areas of the application, we will review all the code written each day, making sure that we understand it and checking for errors or things that could be done better.
 - We will also work on not viewing our errors as a reflection of our programming ability. When reviewing code, we will make sure to give constructive feedback and think of concrete solutions together, rather than simply pointing out errors and leaving each other to struggle alone.
+
+tylerH -- 2019-11-21 9:10
+- deleted login and register route and combined them into a single auth route
