@@ -4,3 +4,8 @@ Members: William Lin, David Sontag, Hilary Zen, Tyler Huang
 williamL -- 2019-11-20 8:49
 - updated the design doc to show what front-end framework we're using
 - cleared up some ambiguity in variable naming and placeholders
+
+williamL -- 2019-11-21 8:45
+- make our code clear and add comments along the way so that our teammates
+can make sense of it and contribute
+- ask each other to check our codes
