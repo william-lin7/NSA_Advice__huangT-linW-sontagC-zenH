@@ -23,9 +23,22 @@ def root():
 def login():
     return render_template("login.html")
 
-@app.route("/register", methods = ["POST"])
+@app.route("/register", methods = ["POST", "GET"])
 def register():
     return render_template("register.html")
+
+@app.route("/auth", methods = ["POST"])
+def auth():
+    if request.form['signup_submit'] == "Sign me up":
+        if (request.form['username'] == "" or request.form['password'] == "" or request.form['password2'] == ""): #return error if username or password is empty
+            flash("ERROR! One or more fields cannot be blank")
+            flash("invalid error")
+            return redirect(url_for("register"))
+        elif request.form['password'] != request.form['password2']:
+            flash("ERROR! Passwords do not match")
+            flash("invalid error")
+            return redirect(url_for("register"))
+            return 0
 
 @app.route("/home")
 def home(): #display home page of website
