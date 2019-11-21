@@ -19,13 +19,13 @@ def root():
     else:
         return render_template("index.html")
 
-@app.route("/auth", methods = ["POST"])
-def auth():
-    print(request.form)
-    if (request.form['submit_button'] == 'Login'):
-        return render_template("login.html")
-    elif (request.form['submit_button'] == 'Register'):
-        return render_template("register.html")
+@app.route("/login", methods = ["POST"])
+def login():
+    return render_template("login.html")
+
+@app.route("/register", methods = ["POST"])
+def register():
+    return render_template("register.html")
 
 @app.route("/home")
 def home(): #display home page of website

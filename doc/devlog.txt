@@ -20,3 +20,6 @@ hilaryZ -- 2019-11-21 4:52
 
 tylerH -- 2019-11-21 9:10
 - deleted login and register route and combined them into a single auth route
+
+tylerH -- 2019-11-21 11:20
+- deleted auth route and added the login and register routes 
