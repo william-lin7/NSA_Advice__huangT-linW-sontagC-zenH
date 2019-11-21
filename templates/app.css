@@ -67,6 +67,12 @@
 }
 
 .login-box {
-  width: 50vw;
-  margin-left: 25vw;
+  width: 40vw;
+  margin-left: 30vw;
+}
+
+.login-box-submit-button {
+  width: 100%;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
