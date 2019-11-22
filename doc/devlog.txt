@@ -11,6 +11,9 @@ tylerH -- 2019-11-20 8:50
 - added login route and register route
 - edited index html to have get the form action
 
+williamL -- 2019-11-20 9:10
+- updated README to include APIs used and instructions on how to run the program
+
 hilaryZ -- 2019-11-21 4:52
 - Although the industry looks for “detached” programmers to enjoy being left alone to be creative, they are very attached to the programs they write. Our code often becomes an extension of themselves, and when there are errors we blame them on other factors, or even ignore them completely.
 - Open, shared programming > secretive, possessive programming
