@@ -41,3 +41,6 @@ hilaryZ -- 2019-11-22 3:12
 - set up the keys.txt file for users to add their API keys
 - the login function reads in the text and adds the key to the user's session
 - if there is no key, the site flashes an error message (the error currently flashes when the user logs out, still working on flashing it on their homepage as soon as they log in)
+
+tylerH -- 2019-11-22 9:08
+- added a bug fix to logout route
