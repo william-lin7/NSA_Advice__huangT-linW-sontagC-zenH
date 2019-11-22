@@ -55,7 +55,6 @@ def auth():
                     db.commit()
                     db.close()
                     flash("Register Success!")
-                    flash("register")
                     return redirect(url_for("home"))
     if request.form['submit_button'] == "Login":
         if (request.form['username'] == "" or request.form['password'] == ""): #return error if username or password is empty
@@ -88,8 +87,7 @@ def auth():
 @app.route("/logout")
 def logout():
     session.pop('user')
-    flash("Logout Success")
-    flash("logout")
+    flash("Logout Success!")
     return render_template("index.html")
 
 @app.route("/home")
