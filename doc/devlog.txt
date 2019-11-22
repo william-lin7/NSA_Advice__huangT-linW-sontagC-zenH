@@ -44,3 +44,7 @@ hilaryZ -- 2019-11-22 3:12
 
 tylerH -- 2019-11-22 9:08
 - added a bug fix to logout route
+
+tylerH -- 2019-11-22 10:08
+- added new table to database
+- added to the auth route to add more user info to database
