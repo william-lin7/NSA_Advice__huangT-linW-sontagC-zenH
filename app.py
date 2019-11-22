@@ -80,10 +80,6 @@ def auth():
                         #print(k)
                         #print(k[1].strip())
                         session['google_key'] = k[1].strip()
-                        if (session['google_key'] == ''):
-                            flash("No key for the Google API!")
-                        else:
-                            flash("Google API key entered")
                         return redirect(url_for("home"))
                     else:
                         flash("Error! Incorrect password")
@@ -103,7 +99,7 @@ def logout():
 @app.route("/home")
 def home(): #display home page of website
     if 'user' in session:
-        return render_template("homepage.html")
+        return render_template("homepage.html", google_key = session['google_key'])
     else:
         return redirect(url_for("root"))
 

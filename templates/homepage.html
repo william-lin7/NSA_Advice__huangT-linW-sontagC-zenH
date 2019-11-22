@@ -11,6 +11,9 @@
   </head>
   <body>
     <h1>Welcome!</h1>
+    {% if google_key == '' %}
+      <h5>Permanent message to get Google key</h5>
+    {% endif %}
     <div class="middle-content-section">
       <form action="/logout">
         <input class="login-box-submit-button" type="submit" name="submit_button" value="Logout">
