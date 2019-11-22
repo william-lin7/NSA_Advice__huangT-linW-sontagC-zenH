@@ -74,6 +74,16 @@ def auth():
                 for p in listPass:
                     if request.form['password'] == p[0]: #correct username and password
                         session['user'] = request.form['username'] #stores the user in the session
+                        f = open("keys.txt", "r") #opens file with the keys
+                        keys = f.readlines()
+                        k = keys[0].split(":")
+                        #print(k)
+                        #print(k[1].strip())
+                        session['google_key'] = k[1].strip()
+                        if (session['google_key'] == ''):
+                            flash("No key for the Google API!")
+                        else:
+                            flash("Google API key entered")
                         return redirect(url_for("home"))
                     else:
                         flash("Error! Incorrect password")
