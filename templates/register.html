@@ -16,11 +16,18 @@
         <div class="small-12 medium-6 column small-order-2 medium-order-1">
           <div class="login-box-form-section">
             <h4 class="login-box-title">Sign up</h4>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% if messages[1] == "invalid error" %}
+                  <h5> {{ messages[0] }} </h5>
+                {% endif %}
+              {% endif %}
+            {% endwith %}
             <form action="/auth" method="POST">
               <input class="login-box-input" type="text" name="username" placeholder="Username">
               <input class="login-box-input" type="password" name="password" placeholder="Password">
               <input class="login-box-input" type="password" name="password2" placeholder="Retype password">
-              <input class="login-box-submit-button" type="submit" name="signup_submit" value="Sign me up">
+              <input class="login-box-submit-button" type="submit" name="submit_button" value="Sign me up">
             </form>
           </div>
         </div>

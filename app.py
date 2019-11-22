@@ -19,7 +19,7 @@ def root():
     else:
         return render_template("index.html")
 
-@app.route("/login", methods = ["POST"])
+@app.route("/login", methods = ["POST", "GET"])
 def login():
     return render_template("login.html")
 
@@ -29,13 +29,13 @@ def register():
 
 @app.route("/auth", methods = ["POST"])
 def auth():
-    if request.form['signup_submit'] == "Sign me up":
+    if request.form['submit_button'] == "Sign me up":
         if (request.form['username'] == "" or request.form['password'] == "" or request.form['password2'] == ""): #return error if username or password is empty
-            flash("ERROR! One or more fields cannot be blank")
+            flash("Error! One or more fields cannot be blank")
             flash("invalid error")
             return redirect(url_for("register"))
         elif request.form['password'] != request.form['password2']:
-            flash("ERROR! Passwords do not match")
+            flash("Error! Passwords do not match")
             flash("invalid error")
             return redirect(url_for("register"))
         else:
@@ -57,6 +57,33 @@ def auth():
                     flash("Register Success!")
                     flash("register")
                     return redirect(url_for("home"))
+    if request.form['submit_button'] == "Login":
+        if (request.form['username'] == "" or request.form['password'] == ""): #return error if username or password is empty
+            flash("ERROR! One or more fields cannot be blank")
+            flash("invalid error")
+            return redirect(url_for("login"))
+        else:
+            dbfile = "data.db"
+            db = sqlite3.connect(dbfile)
+            c = db.cursor() #above three lines allow sqlite commands to be performed from python script
+            command = "SELECT username FROM users WHERE username = \"{}\";"
+            listUsers = c.execute(command.format(request.form['username'])) #fills in brackets with the given username and executes it in sqlite
+            bar = list(enumerate(listUsers))
+            if len(bar) > 0: #checks whether there exists a user with the given username
+                getPass = "SELECT password FROM users WHERE username = \"{}\";"
+                listPass = c.execute(getPass.format(bar[0][1][0]))
+                for p in listPass:
+                    if request.form['password'] == p[0]: #correct username and password
+                        session['user'] = request.form['username'] #stores the user in the session
+                        return redirect(url_for("home"))
+                    else:
+                        flash("Error! Incorrect password")
+                        flash("invalid error")
+                        return redirect(url_for("login"))
+            else:
+                flash("Error! Incorrect username")
+                flash("invalid error")
+                return redirect(url_for("login"))
 
 @app.route("/home")
 def home(): #display home page of website
