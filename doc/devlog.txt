@@ -31,4 +31,5 @@ tylerH -- 2019-11-21 18:20
 - worked on auth route to add credentials to database.
 - added a function to get the length of any table.
 - worked on auth route to login to the website
-- added error flashing to login.html and register.html
+- added error flashing to login.html, register.html and index.html
+- worked on logout route

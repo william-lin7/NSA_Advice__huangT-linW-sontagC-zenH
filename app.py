@@ -85,6 +85,11 @@ def auth():
                 flash("invalid error")
                 return redirect(url_for("login"))
 
+@app.route("/logout")
+def logout():
+    session.pop('user')
+    return render_template("index.html")
+
 @app.route("/home")
 def home(): #display home page of website
     if 'user' in session:
