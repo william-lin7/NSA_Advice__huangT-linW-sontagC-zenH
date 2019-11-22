@@ -88,7 +88,7 @@ def auth():
 def logout():
     session.pop('user')
     flash("Logout Success!")
-    return render_template("index.html")
+    return redirect(url_for("root"))
 
 @app.route("/home")
 def home(): #display home page of website
