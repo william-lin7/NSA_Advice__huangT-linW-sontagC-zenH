@@ -10,7 +10,11 @@
     <title>Homepage</title>
   </head>
   <body>
-    <h1>Welcome!</h1>
+    <h1>Welcome {{ user }}!</h1>
+    Name: {{ name }} <br>
+    Email: {{ email }} <br>
+    Phone Number: {{ pnum }} <br>
+    Location: {{ loc }} <br>
     {% if google_key == '' %}
       <h5>Permanent message to get Google key</h5>
     {% endif %}
