@@ -31,13 +31,11 @@ def register():
 @app.route("/auth", methods = ["POST"])
 def auth():
     if request.form['submit_button'] == "Sign me up":
-        if (request.form['username'] == "" or request.form['password'] == "" or request.form['password2'] == "" or request.form['first_name']): #return error if username or password is empty
+        if (request.form['username'] == "" or request.form['password'] == "" or request.form['password2'] == "" or request.form['first_name'] == "" or request.form['last_name'] == ""): #return error if username or password is empty
             flash("Error! One or more of the required fields are empty")
-            flash("invalid error")
             return redirect(url_for("register"))
         elif request.form['password'] != request.form['password2']:
             flash("Error! Passwords do not match")
-            flash("invalid error")
             return redirect(url_for("register"))
         else:
             dbfile = "data.db"
@@ -48,11 +46,11 @@ def auth():
             for bar in newUser:
                 if bar[0] > 0:
                     flash("Username is already taken. Please choose another one.")
-                    flash("register error")
                     return redirect(url_for("register"))
                 else:
                     id = getTableLen("users") #gives the user the next availabe id
                     c.execute("INSERT INTO users VALUES(?, ?, ?);", (id, request.form['username'], request.form['password'])) #different version of format
+                    c.execute("INSERT INTO info VALUES(?, ?, ?, ?, ?, ?)", (id, request.form['first_name'],request.form['last_name'], "", "", ""))
                     db.commit()
                     db.close()
                     flash("Register Success!")
@@ -60,7 +58,6 @@ def auth():
     if request.form['submit_button'] == "Login":
         if (request.form['username'] == "" or request.form['password'] == ""): #return error if username or password is empty
             flash("ERROR! One or more fields cannot be blank")
-            flash("invalid error")
             return redirect(url_for("login"))
         else:
             dbfile = "data.db"
@@ -84,11 +81,9 @@ def auth():
                         return redirect(url_for("home"))
                     else:
                         flash("Error! Incorrect password")
-                        flash("invalid error")
                         return redirect(url_for("login"))
             else:
                 flash("Error! Incorrect username")
-                flash("invalid error")
                 return redirect(url_for("login"))
 
 @app.route("/logout")
