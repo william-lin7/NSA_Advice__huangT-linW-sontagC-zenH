@@ -31,8 +31,8 @@ def register():
 @app.route("/auth", methods = ["POST"])
 def auth():
     if request.form['submit_button'] == "Sign me up":
-        if (request.form['username'] == "" or request.form['password'] == "" or request.form['password2'] == ""): #return error if username or password is empty
-            flash("Error! One or more fields cannot be blank")
+        if (request.form['username'] == "" or request.form['password'] == "" or request.form['password2'] == "" or request.form['first_name']): #return error if username or password is empty
+            flash("Error! One or more of the required fields are empty")
             flash("invalid error")
             return redirect(url_for("register"))
         elif request.form['password'] != request.form['password2']:
