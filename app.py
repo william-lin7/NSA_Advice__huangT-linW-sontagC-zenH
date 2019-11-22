@@ -39,27 +39,24 @@ def auth():
             flash("invalid error")
             return redirect(url_for("register"))
         else:
-            dbfile = "holding.db"
+            dbfile = "data.db"
             db = sqlite3.connect(dbfile)
-            c = db.cursor() #above three lines allow sqlite commands to be performed from python script
-            command = "SELECT username FROM users WHERE username = \"{}\";"
-            listUsers = c.execute(command.format(request.form['username'])) #fills in brackets with the given username and executes it in sqlite
-            bar = list(enumerate(listUsers))
-            if len(bar) > 0: #checks whether there exists a user with the given username
-                getPass = "SELECT password FROM users WHERE username = \"{}\";"
-                listPass = c.execute(getPass.format(bar[0][1][0]))
-                for p in listPass:
-                    if request.form['password'] == p[0]: #correct username and password
-                        session['user'] = request.form['username'] #stores the user in the session
-                        return redirect(url_for("home"))
-                    else:
-                        flash("ERROR! Incorrect password")
-                        flash("invalid error")
-                        return redirect(url_for("root"))
-            else:
-                flash("ERROR! Incorrect username")
-                flash("invalid error")
-                return redirect(url_for("register"))
+            c = db.cursor() #standard connection
+            command = "SELECT COUNT(*) FROM users WHERE username = \"{}\";"
+            newUser = c.execute(command.format(request.form['username'])) #execution of sqlite command with the given username instead of the brackets
+            for bar in newUser:
+                if bar[0] > 0:
+                    flash("Username is already taken. Please choose another one.")
+                    flash("register error")
+                    return redirect(url_for("register"))
+                else:
+                    id = getTableLen("users") #gives the user the next availabe id
+                    c.execute("INSERT INTO users VALUES(?, ?, ?);", (id, request.form['username'], request.form['password'])) #different version of format
+                    db.commit()
+                    db.close()
+                    flash("Register Success!")
+                    flash("register")
+                    return redirect(url_for("home"))
 
 @app.route("/home")
 def home(): #display home page of website
@@ -67,6 +64,15 @@ def home(): #display home page of website
         return render_template("homepage.html")
     else:
         return redirect(url_for("root"))
+
+def getTableLen(tbl): #returns the length of a table
+    dbfile = "data.db"
+    db = sqlite3.connect(dbfile)
+    c = db.cursor()
+    command = "SELECT COUNT(*) FROM {};"
+    q = c.execute(command.format(tbl))
+    for line in q:
+        return line[0]
 
 if __name__ == "__main__":
     app.debug = True

@@ -25,4 +25,8 @@ tylerH -- 2019-11-21 11:20
 - deleted auth route and added the login and register routes
 
 tylerH -- 2019-11-21 2:20
-- added auth route to check register and login credentials 
+- added auth route to check register and login credentials
+
+tylerH -- 2019-11-21 18:20
+- worked on register route to add credentials to database.
+- added a function to get the length of any table. 
