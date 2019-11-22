@@ -49,3 +49,4 @@ tylerH -- 2019-11-22 10:08
 - added new table to database
 - added to the auth route to add more user info to database
 - edited register.html to have more fields to input information
+- edited login.html forms to require the fields

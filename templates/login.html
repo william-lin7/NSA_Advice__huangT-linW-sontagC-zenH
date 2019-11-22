@@ -22,8 +22,8 @@
               {% endif %}
             {% endwith %}
             <form action="/auth" method="POST">
-              <input class="login-box-input" type="text" name="username" placeholder="Username">
-              <input class="login-box-input" type="password" name="password" placeholder="Password">
+              <input class="login-box-input" type="text" name="username" placeholder="Username" required>
+              <input class="login-box-input" type="password" name="password" placeholder="Password" required>
               <input class="login-box-submit-button" type="submit" name="submit_button" value="Login">
             </form>
           </div>
