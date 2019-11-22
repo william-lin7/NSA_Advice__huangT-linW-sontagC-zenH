@@ -88,6 +88,8 @@ def auth():
 @app.route("/logout")
 def logout():
     session.pop('user')
+    flash("Logout Success")
+    flash("logout")
     return render_template("index.html")
 
 @app.route("/home")
