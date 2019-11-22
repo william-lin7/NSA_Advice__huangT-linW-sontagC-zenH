@@ -93,7 +93,8 @@ def auth():
 
 @app.route("/logout")
 def logout():
-    session.pop('user')
+    if 'user' in session:
+        session.pop('user')
     flash("Logout Success!")
     return redirect(url_for("root"))
 
