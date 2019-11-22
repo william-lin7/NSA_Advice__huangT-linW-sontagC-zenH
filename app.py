@@ -31,10 +31,7 @@ def register():
 @app.route("/auth", methods = ["POST"])
 def auth():
     if request.form['submit_button'] == "Sign me up":
-        if (request.form['username'] == "" or request.form['password'] == "" or request.form['password2'] == "" or request.form['first_name'] == "" or request.form['last_name'] == ""): #return error if username or password is empty
-            flash("Error! One or more of the required fields are empty")
-            return redirect(url_for("register"))
-        elif request.form['password'] != request.form['password2']:
+        if request.form['password'] != request.form['password2']:
             flash("Error! Passwords do not match")
             return redirect(url_for("register"))
         else:
@@ -50,7 +47,7 @@ def auth():
                 else:
                     id = getTableLen("users") #gives the user the next availabe id
                     c.execute("INSERT INTO users VALUES(?, ?, ?);", (id, request.form['username'], request.form['password'])) #different version of format
-                    c.execute("INSERT INTO info VALUES(?, ?, ?, ?, ?, ?)", (id, request.form['first_name'],request.form['last_name'], "", "", ""))
+                    c.execute("INSERT INTO info VALUES(?, ?, ?, ?, ?, ?)", (id, request.form['first_name'], request.form['last_name'], request.form['email'], str(request.form['phoneNum']), ""))
                     db.commit()
                     db.close()
                     flash("Register Success!")
