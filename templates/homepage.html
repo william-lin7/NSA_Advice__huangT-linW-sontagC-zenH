@@ -14,6 +14,14 @@
     {% if google_key == '' %}
       <h5>Permanent message to get Google key</h5>
     {% endif %}
+    <h3>Edit Your Information!</h3>
+    <form action="/auth" method="POST">
+      <h4>First Name</h4>
+      <input class="login-box-input" type="text" name="first_name" placeholder="First Name">
+      <h4>Last Name</h4>
+      <input class="login-box-input" type="text" name="last_name" placeholder="Last Name">
+      <input class="login-box-submit-button" type="submit" name="submit_button" value="Update">
+    </form>
     <div class="middle-content-section">
       <form action="/logout">
         <input class="login-box-submit-button" type="submit" name="submit_button" value="Logout">
