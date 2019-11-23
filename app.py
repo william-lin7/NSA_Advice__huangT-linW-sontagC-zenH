@@ -75,7 +75,7 @@ def auth():
                     #print(k)
                     #print(k[1].strip())
                     session['google_key'] = k[1].strip()
-                    getUserInfo()
+                    fillUserInfo()
                     return redirect(url_for("home"))
                 else:
                     flash("Error! Incorrect password")
@@ -115,7 +115,7 @@ def getTableLen(tbl): #returns the length of a table
     for line in q:
         return line[0]
 
-def getUserInfo():
+def fillUserInfo():
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
