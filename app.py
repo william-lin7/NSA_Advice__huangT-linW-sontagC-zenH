@@ -130,7 +130,7 @@ def logout():
 @app.route("/home")
 def home(): #display home page of website
     if 'user' in session:
-        u = urllib.request.urlopen('https://dog.ceo/api/breeds/image/random')
+        u = urllib.request.urlopen('https://dog.ceo/api/breed/corgi/images/random')
         response = u.read()
         data = json.loads(response)
         img = data['message']
