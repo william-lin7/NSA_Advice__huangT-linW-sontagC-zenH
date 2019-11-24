@@ -51,4 +51,10 @@ tylerH -- 2019-11-22 10:08
 - edited register.html to have more fields to input information
 - edited login.html forms to require the fields
 - added function to get user info from info table
-- edited homepage.html to display user info 
+- edited homepage.html to display user info
+
+tylerH -- 2019-11-23 20:08
+- added a new html page to update a user's info
+- added update route to render the update info page
+- added a link to homepage to allow user's to update their info
+- updated auth route to update user info

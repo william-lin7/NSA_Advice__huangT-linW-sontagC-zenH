@@ -28,7 +28,9 @@
         <h1 class="webName">Welcome to NSA Advice!</h1>
         {% with messages = get_flashed_messages() %}
           {% if messages %}
-            <h5> {{ messages[0] }} </h5>
+            {% if messages[1] == "index" %}
+              <h5> {{ messages[0] }} </h5>
+            {% endif %}
           {% endif %}
         {% endwith %}
         <form action="/login" method="POST">

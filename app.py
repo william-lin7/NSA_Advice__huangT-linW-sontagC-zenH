@@ -30,6 +30,10 @@ def login():
 def register():
     return render_template("register.html")
 
+@app.route("/update", methods = ["POST", "GET"])
+def update():
+    return render_template("update.html")
+
 @app.route("/auth", methods = ["POST"])
 def auth():
     global userID
@@ -54,6 +58,7 @@ def auth():
                     db.commit()
                     db.close()
                     flash("Register Success!")
+                    flash("index")
                     return redirect(url_for("home"))
     if request.form['submit_button'] == "Login":
         dbfile = "data.db"
@@ -83,6 +88,54 @@ def auth():
         else:
             flash("Error! Incorrect username")
             return redirect(url_for("login"))
+    if request.form['submit_button'] == "Update Info":
+        dbfile = "data.db"
+        db = sqlite3.connect(dbfile)
+        c = db.cursor() #above three lines allow sqlite commands to be performed from python script
+        blank = True
+        if request.form['first_name'] != "":
+            command = "UPDATE info SET firstName = \"{}\" WHERE id = {};"
+            c.execute(command.format(request.form['first_name'],userID))
+            db.commit()
+            blank = False
+        if request.form['last_name'] != "":
+            command = "UPDATE info SET lastName = \"{}\" WHERE id = {};"
+            c.execute(command.format(request.form['last_name'],userID))
+            db.commit()
+            blank = False
+        if request.form['username'] != "":
+            command = "UPDATE users SET username = \"{}\" WHERE id = {};"
+            c.execute(command.format(request.form['username'],userID))
+            db.commit()
+            blank = False
+            session['user'] = request.form['username']
+        if request.form['password'] != "":
+            command = "UPDATE users SET password = \"{}\" WHERE id = {};"
+            c.execute(command.format(request.form['password'],userID))
+            db.commit()
+            blank = False
+        if request.form['email'] != "":
+            command = "UPDATE info SET email = \"{}\" WHERE id = {};"
+            c.execute(command.format(request.form['email'],userID))
+            db.commit()
+            blank = False
+        if request.form['phoneNum'] != "":
+            command = "UPDATE info SET phone = \"{}\" WHERE id = {};"
+            c.execute(command.format(request.form['phoneNum'],userID))
+            db.commit()
+            blank = False
+        if request.form['location'] != "":
+            command = "UPDATE info SET location = \"{}\" WHERE id = {};"
+            c.execute(command.format(request.form['location'],userID))
+            db.commit()
+            blank = False
+        if not blank:
+            flash("Update Success!")
+        else:
+            flash("Nothing has been updated.")
+        db.close()
+        fillUserInfo()
+        return redirect(url_for("home"))
 
 @app.route("/logout")
 def logout():
