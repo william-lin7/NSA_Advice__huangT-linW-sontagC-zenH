@@ -124,6 +124,7 @@ def logout():
         session.pop('user')
         userID = -1
     flash("Logout Success!")
+    flash("index")
     return redirect(url_for("root"))
 
 @app.route("/home")
