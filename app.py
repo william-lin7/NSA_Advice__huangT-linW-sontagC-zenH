@@ -130,10 +130,6 @@ def logout():
 @app.route("/home")
 def home(): #display home page of website
     if 'user' in session:
-        u = urllib.request.urlopen('https://dog.ceo/api/breed/corgi/images/random')
-        response = u.read()
-        data = json.loads(response)
-        img = data['message']
         return render_template(
             "homepage.html",
             #google_key = session['google_key'],
@@ -141,8 +137,7 @@ def home(): #display home page of website
             name = userInfo['firstName'] + " " + userInfo['lastName'],
             email = userInfo['email'],
             pnum = userInfo['phoneNum'],
-            loc = userInfo['location'],
-            pic = img)
+            loc = userInfo['location'])
     else:
         return redirect(url_for("root"))
 
