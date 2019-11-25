@@ -1,5 +1,6 @@
 from flask import request
 import json, urllib
+from urllib.request import urlopen
 
 #API key for Full Contact
 #fQqUtVhwiJSAtMWCpe9zR8MTOTFxoTZ6
@@ -14,11 +15,11 @@ def getIP():
     return request.environ['REMOTE_ADDR']
     
 def getCity():
-    ipstack = urllib.urlopen("http://api.ipstack.com/"+getIP()+"?access_key=143e7f36d3776304d9bca36e109fc225&format=1").read
+    ipstack = urllib..request.urlopen("http://api.ipstack.com/"+getIP()+"?access_key=143e7f36d3776304d9bca36e109fc225&format=1").read()
     ipstackData = json.loads(ipstack)
     return ipstackData["city"]
     
 def getISP():
-    ipapi = urllib.urlopen("http://ip-api.com/json/"+getIP()+"fields=status,message,isp,org,as,asname,reverse,mobile,proxy,query")
+    ipapi = urllib.request.urlopen("http://ip-api.com/json/"+getIP()+"fields=status,message,isp,org,as,asname,reverse,mobile,proxy,query").read()
     ipapiData = json.loads(ipstack)
     return ipapiData["isp"]
