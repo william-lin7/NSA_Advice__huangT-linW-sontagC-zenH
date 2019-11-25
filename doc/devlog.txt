@@ -1,2 +1,61 @@
 TEAM: NSA_Advice
 Members: William Lin, David Sontag, Hilary Zen, Tyler Huang
+
+williamL -- 2019-11-20 8:49
+- updated the design doc to show what front-end framework we're using
+- cleared up some ambiguity in variable naming and placeholders
+
+tylerH -- 2019-11-20 8:50
+- created app.py file and added requirements.txt file
+- added the root function and home function
+- added login route and register route
+- edited index html to have get the form action
+
+williamL -- 2019-11-20 9:10
+- updated README to include APIs used and instructions on how to run the program
+
+hilaryZ -- 2019-11-21 4:52
+- Although the industry looks for “detached” programmers to enjoy being left alone to be creative, they are very attached to the programs they write. Our code often becomes an extension of themselves, and when there are errors we blame them on other factors, or even ignore them completely.
+- Open, shared programming > secretive, possessive programming
+- The article explained very clearly why it can be so difficult to ask for help and debug code in groups. We were shocked by the examples throughout the text that showed how new programmers working together could quickly surpass others who worked alone, even though they had years of experience.
+- We learned that it isn’t enough to just have one person check code, since they also become attached to the debugging work they have done. To be most effective, even though all of us are focusing on separate areas of the application, we will review all the code written each day, making sure that we understand it and checking for errors or things that could be done better.
+- We will also work on not viewing our errors as a reflection of our programming ability. When reviewing code, we will make sure to give constructive feedback and think of concrete solutions together, rather than simply pointing out errors and leaving each other to struggle alone.
+
+tylerH -- 2019-11-21 9:10
+- deleted login and register route and combined them into a single auth route
+
+tylerH -- 2019-11-21 11:20
+- deleted auth route and added the login and register routes
+
+tylerH -- 2019-11-21 2:20
+- added auth route to check register and login credentials
+
+tylerH -- 2019-11-21 18:20
+- worked on auth route to add credentials to database.
+- added a function to get the length of any table.
+- worked on auth route to login to the website
+- added error flashing to login.html, register.html and index.html
+- worked on logout route
+
+hilaryZ -- 2019-11-22 3:12
+- set up the keys.txt file for users to add their API keys
+- the login function reads in the text and adds the key to the user's session
+- if there is no key, the site flashes an error message (the error currently flashes when the user logs out, still working on flashing it on their homepage as soon as they log in)
+
+tylerH -- 2019-11-22 9:08
+- added a bug fix to logout route
+
+tylerH -- 2019-11-22 10:08
+- added new table to database
+- added to the auth route to add more user info to database
+- edited register.html to have more fields to input information
+- edited login.html forms to require the fields
+- added function to get user info from info table
+- edited homepage.html to display user info
+
+tylerH -- 2019-11-23 20:08
+- added a new html page to update a user's info
+- added update route to render the update info page
+- added a link to homepage to allow user's to update their info
+- updated auth route to update user info
+- changed the way to update information in auth route by using a while loop instead of hard coding 

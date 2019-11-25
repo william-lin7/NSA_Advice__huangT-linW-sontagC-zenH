@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Compressed CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+    <link rel="stylesheet" href="../static/stylesheets/app.css">
+    <title>NSA Advice</title>
+  </head>
+  <body>
+    <div class="hero-full-screen">
+
+      <div class="top-content-section">
+        <div class="top-bar">
+          <div class="top-bar-left">
+            <ul class="menu">
+              <li class="menu-text"><img src="key.svg" alt="logo" style = "width:75px;height:30px;"></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">How To Use</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="middle-content-section">
+        <h1 class="webName">Welcome to NSA Advice!</h1>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% if messages[1] == "index" %}
+              <h5> {{ messages[0] }} </h5>
+            {% endif %}
+          {% endif %}
+        {% endwith %}
+        <form action="/login" method="POST">
+          <input type="submit" class="button large" value="Login">
+        </form>
+        <form action="/register" method="POST">
+          <input type="submit" class="button large" value="Register">
+        </form>
+      </div>
+
+      <div class="bottom-content-section" data-magellan data-threshold="0">
+        <a href="#main-content-section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"></svg></a>
+      </div>
+
+    </div>
+
+    <div id="main-content-section" data-magellan-target="main-content-section">
+      <!-- your content goes here -->
+    </div>
+
+
+  </body>
+</html>
