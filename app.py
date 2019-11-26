@@ -7,6 +7,7 @@
 from flask import Flask, render_template, request,  session, redirect, url_for, flash
 import sqlite3
 import urllib, json
+import api
 app = Flask(__name__)
 app = Flask(__name__)
 app.secret_key = "adsfgt"
@@ -20,6 +21,7 @@ def root():
     if 'user' in session:
         return redirect(url_for("home"))
     else:
+        #flash(api.getIP()) #Coby debug statement
         return render_template("index.html")
 
 @app.route("/login", methods = ["POST", "GET"])
@@ -130,10 +132,6 @@ def logout():
 @app.route("/home")
 def home(): #display home page of website
     if 'user' in session:
-        u = urllib.request.urlopen('https://dog.ceo/api/breed/corgi/images/random')
-        response = u.read()
-        data = json.loads(response)
-        img = data['message']
         return render_template(
             "homepage.html",
             #google_key = session['google_key'],
@@ -141,10 +139,17 @@ def home(): #display home page of website
             name = userInfo['firstName'] + " " + userInfo['lastName'],
             email = userInfo['email'],
             pnum = userInfo['phoneNum'],
-            loc = userInfo['location'],
-            pic = img)
+            loc = userInfo['location'])
     else:
         return redirect(url_for("root"))
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/howToUse")
+def howToUse():
+    return render_template("howToUse.html")
 
 def getTableLen(tbl): #returns the length of a table
     dbfile = "data.db"
