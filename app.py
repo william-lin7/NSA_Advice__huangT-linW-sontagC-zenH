@@ -7,6 +7,7 @@
 from flask import Flask, render_template, request,  session, redirect, url_for, flash
 import sqlite3
 import urllib, json
+import api
 app = Flask(__name__)
 app = Flask(__name__)
 app.secret_key = "adsfgt"
@@ -20,6 +21,7 @@ def root():
     if 'user' in session:
         return redirect(url_for("home"))
     else:
+        #flash(api.getIP()) #Coby debug statement
         return render_template("index.html")
 
 @app.route("/login", methods = ["POST", "GET"])
