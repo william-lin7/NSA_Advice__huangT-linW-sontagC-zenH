@@ -141,6 +141,14 @@ def home(): #display home page of website
     else:
         return redirect(url_for("root"))
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/howToUse")
+def howToUse():
+    return render_template("howToUse.html")
+
 def getTableLen(tbl): #returns the length of a table
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
