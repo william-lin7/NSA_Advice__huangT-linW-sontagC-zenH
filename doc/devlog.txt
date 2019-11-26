@@ -60,3 +60,40 @@ tylerH -- 2019-11-23 20:08
 - added a link to homepage to allow user's to update their info
 - updated auth route to update user info
 - changed the way to update information in auth route by using a while loop instead of hard coding
+
+
+HOME STRETCH PLAN
+
+Things left to do:
+- Get and display info from APIs
+    - use a lot of css
+
+2019-11-26
+  - william
+      - update about and howToUse pages
+  - coby
+      - figure out twitter and google civic APIs
+  - tyler
+      - fix what data is displayed at home page
+  - hilary
+      - css for home page
+
+2019-11-27
+  - william
+      - add openWeather API info
+  - coby
+      - implement the twitter and google civic APIs into the website
+  - tyler 
+      - fix the update info section to already have current info
+  - hilary
+      - css for register and login pages
+
+2019-11-28
+  - william
+      - add css to about and howToUse pages
+  - coby
+      - look into more APIs possibly
+  - tyler
+      - add css
+  - hilary
+      - add css
