@@ -12,10 +12,12 @@ from urllib.request import urlopen
 #IP Stack key: 143e7f36d3776304d9bca36e109fc225
 #http://ip-api.com/json/165.155.139.162?fields=status,message,isp,org,as,asname,reverse,mobile,proxy,query
 def getIP():
-    return request.environ['REMOTE_ADDR']
+    ipstack = urllib.request.urlopen("http://api.ipstack.com/check?access_key=143e7f36d3776304d9bca36e109fc225&format=1").read()
+    ipstackData = json.loads(ipstack)
+    return ipstackData["ip"]
     
 def getCity():
-    ipstack = urllib..request.urlopen("http://api.ipstack.com/"+getIP()+"?access_key=143e7f36d3776304d9bca36e109fc225&format=1").read()
+    ipstack = urllib.request.urlopen("http://api.ipstack.com/"+getIP()+"?access_key=143e7f36d3776304d9bca36e109fc225&format=1").read()
     ipstackData = json.loads(ipstack)
     return ipstackData["city"]
     

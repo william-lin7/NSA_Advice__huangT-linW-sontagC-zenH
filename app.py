@@ -7,6 +7,7 @@
 from flask import Flask, render_template, request,  session, redirect, url_for, flash
 import sqlite3
 import urllib, json
+import api
 app = Flask(__name__)
 app = Flask(__name__)
 app.secret_key = "adsfgt"
@@ -20,6 +21,7 @@ def root():
     if 'user' in session:
         return redirect(url_for("home"))
     else:
+        #flash(api.getIP()) #Coby debug statement
         return render_template("index.html")
 
 @app.route("/login", methods = ["POST", "GET"])
@@ -130,9 +132,10 @@ def logout():
 @app.route("/home")
 def home(): #display home page of website
     if 'user' in session:
+        fillUserInfo()
         return render_template(
             "homepage.html",
-            #google_key = session['google_key'],
+            google_key = session['google_key'],
             user = session['user'],
             name = userInfo['firstName'] + " " + userInfo['lastName'],
             email = userInfo['email'],
@@ -148,6 +151,30 @@ def about():
 @app.route("/howToUse")
 def howToUse():
     return render_template("howToUse.html")
+
+@app.route("/weather")
+def weather():
+    url = "http://api.openweathermap.org/data/2.5/weather?q={}&APPID=da19d101a993403bd4ab9a3284ec0f0d"
+    if userInfo['location'] != "":
+        loc = userInfo['location']
+        if ' ' in loc:
+            loc = loc.replace(' ', '%20')
+        try:
+            u = urllib.request.urlopen(url.format(loc))
+            response = u.read()
+            data = json.loads(response)
+            return render_template("weather.html", info = data)
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                flash("Error! Invalid city name")
+                return redirect(url_for("home"))
+            else:
+                flash("Not 404 error.")
+                return redirect(url_for("home"))
+    else:
+        flash("Location required. Please enter a city name.")
+        return redirect(url_for("home"))
+
 
 def getTableLen(tbl): #returns the length of a table
     dbfile = "data.db"

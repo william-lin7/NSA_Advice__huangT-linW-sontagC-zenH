@@ -98,6 +98,11 @@ Things left to do:
   - hilary
       - add css
 
-williamL -- 2019-11-20 9:24
-  - create the "About" and "How to Use" pages along with navbars for every page
-      - filled in info for both page
+tylerH -- 2019-11-26 9:00
+  - added a button to homepage to redirect user's to check the weather of their location
+  - added a route to display the weather of the location
+  - added 404 error handling to weather route
+
+  williamL -- 2019-11-20 9:24
+    - create the "About" and "How to Use" pages along with navbars for every page
+        - filled in info for both page
