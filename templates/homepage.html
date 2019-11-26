@@ -10,13 +10,15 @@
     <title>Homepage</title>
   </head>
   <body>
-    <h1>Welcome {{ user }}!</h1>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <h5> {{ messages[0] }} </h5>
-      {% endif %}
-    {% endwith %}
-    <div class="middle-content-section grid-x text-center">
+    <div class="home-top">
+      <h1>Welcome {{ user }}!</h1>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <h5> {{ messages[0] }} </h5>
+        {% endif %}
+      {% endwith %}
+    </div>
+    <div class="home-grid middle-content-section grid-x text-center">
       <!--
       <center>
         <h1>Welcome {{ user }}!</h1>
@@ -36,6 +38,7 @@
       </center>
       -->
       <div class="cell small-4 large-4">
+        <h5>Basic Information</h5>
         Name: {{ name }} <br>
         Email: {{ email }} <br>
         Phone Number: {{ pnum }} <br>
@@ -48,7 +51,8 @@
       <div class="cell small-4 large-4">
         <h5>Get Missing API Keys</h5>
         {% if google_key == '' %}
-          <h5>Permanent message to get Google key</h5>
+          <h6>Your Google API key is missing!</h6>
+          <p>Log into your Google account and go to "Credentials" at your <a href="https://console.developers.google.com/" target="_blank">Google Developer Console</a>, where you can start a new project to get a key!</p>
         {% endif %}
       </div>
     </div>

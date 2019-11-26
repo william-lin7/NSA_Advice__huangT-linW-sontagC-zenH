@@ -134,7 +134,7 @@ def home(): #display home page of website
     if 'user' in session:
         return render_template(
             "homepage.html",
-            #google_key = session['google_key'],
+            google_key = session['google_key'],
             user = session['user'],
             name = userInfo['firstName'] + " " + userInfo['lastName'],
             email = userInfo['email'],

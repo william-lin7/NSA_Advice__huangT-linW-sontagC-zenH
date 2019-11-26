@@ -114,3 +114,8 @@
   right: 0;
   transition: all 0.5s ease;
 }
+
+.home-top {
+  margin: auto;
+  text-align: center;
+}
