@@ -83,7 +83,7 @@ Things left to do:
       - add openWeather API info
   - coby
       - implement the twitter and google civic APIs into the website
-  - tyler 
+  - tyler
       - fix the update info section to already have current info
   - hilary
       - css for register and login pages
@@ -97,3 +97,7 @@ Things left to do:
       - add css
   - hilary
       - add css
+
+  tylerH -- 2019-11-26 9:00
+    - added a button to homepage to redirect user's to check the weather of their location
+    - added a route to display the weather of the location
