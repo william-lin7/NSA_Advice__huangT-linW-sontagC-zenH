@@ -151,6 +151,22 @@ def about():
 def howToUse():
     return render_template("howToUse.html")
 
+@app.route("/weather")
+def weather():
+    url = "http://api.openweathermap.org/data/2.5/weather?q={}&APPID=da19d101a993403bd4ab9a3284ec0f0d"
+    if userInfo['location'] != "":
+        loc = userInfo['location']
+        if ' ' in loc:
+            loc = loc.replace(' ', '%20')
+        u = urllib.request.urlopen(url.format(loc))
+        response = u.read()
+        data = json.loads(response)
+        return render_template("weather.html", info = data)
+    else:
+        flash("Location required. Please enter a city name.")
+        return redirect(url_for("home"))
+
+
 def getTableLen(tbl): #returns the length of a table
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)

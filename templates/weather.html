@@ -12,29 +12,16 @@
   <body>
     <div class="middle-content-section">
       <center>
-        <h1>Welcome {{ user }}!</h1>
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <h5> {{ messages[0] }} </h5>
-          {% endif %}
-        {% endwith %}
-        Name: {{ name }} <br>
-        Email: {{ email }} <br>
-        Phone Number: {{ pnum }} <br>
-        Location: {{ loc }} <br>
-        {% if google_key == '' %}
-          <h5>Permanent message to get Google key</h5>
-        {% endif %}
-        <a href="update"><h4>Update Info<h4></a>
+        {{ info }}
       </center>
     </div>
     <div class="login-box">
       <div class="row collapse expanded">
         <div class="small-12 medium-6 column small-order-2 medium-order-1">
-          <form action="/weather">
-            <input class="login-box-submit-button" type="submit" name="submit_button" value="Check Weather">
-          </form>
           <div class="login-box-form-section">
+            <form action="/home">
+              <input class="login-box-submit-button" type="submit" name="submit_button" value="Home Page">
+            </form>
             <form action="/logout">
               <input class="login-box-submit-button" type="submit" name="submit_button" value="Logout">
             </form>
