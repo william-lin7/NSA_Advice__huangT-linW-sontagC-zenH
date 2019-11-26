@@ -101,3 +101,4 @@ Things left to do:
   tylerH -- 2019-11-26 9:00
     - added a button to homepage to redirect user's to check the weather of their location
     - added a route to display the weather of the location
+    - added 404 error handling to weather route

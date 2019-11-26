@@ -132,6 +132,7 @@ def logout():
 @app.route("/home")
 def home(): #display home page of website
     if 'user' in session:
+        fillUserInfo()
         return render_template(
             "homepage.html",
             #google_key = session['google_key'],
@@ -158,10 +159,18 @@ def weather():
         loc = userInfo['location']
         if ' ' in loc:
             loc = loc.replace(' ', '%20')
-        u = urllib.request.urlopen(url.format(loc))
-        response = u.read()
-        data = json.loads(response)
-        return render_template("weather.html", info = data)
+        try:
+            u = urllib.request.urlopen(url.format(loc))
+            response = u.read()
+            data = json.loads(response)
+            return render_template("weather.html", info = data)
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                flash("Error! Invalid city name")
+                return redirect(url_for("home"))
+            else:
+                flash("Not 404 error.")
+                return redirect(url_for("home"))
     else:
         flash("Location required. Please enter a city name.")
         return redirect(url_for("home"))
