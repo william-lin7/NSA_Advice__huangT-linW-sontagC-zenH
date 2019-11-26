@@ -6,17 +6,39 @@
 
     <!-- Compressed CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css"/>
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='stylesheets/app.css') }}">
+    <link rel="stylesheet" href= "../static/stylesheets/app.css">
     <title>About</title>
   </head>
   <body>
     <nav class="hover-underline-menu" data-menu-underline-from-center>
       <ul class="menu align-center">
-        <li><a href="#">One</a></li>
-        <li><a href="#">Two</a></li>
-        <li><a href="#">Three</a></li>
-        <li><a href="#">Four</a></li>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/howToUse">How to Use</a></li>
       </ul>
     </nav>
+    <h3><p class = "p1"> Welcome to our website! We are dedicated to providing you random
+        accurate information regarding your surroundings. The amount of
+        information you have access to depends on how much information
+        you provide! Don't worry, your information is only used for
+        entertainment purposes. So enjoy our website!!
+    </p>
+    </h3>
+    <div class = "p1">
+      <h6> Brought to you by: <br><br><br>
+        - William Lin <br>
+        - Tyler Huang <br>
+        - Coby Sontag <br>
+        - Hilary Zen <br> <br>
+
+        APIs Used <br>
+        Full Contact: https://docs.google.com/document/d/1EPvnSGKtxZT3qKZXAlt76yuSJ2vSZ6OWJmi29YdHiNs/edit <br>
+            - returns a person or company's name, age, social media, etc.. when given minimal information <br><br>
+        Google Civic Information: https://docs.google.com/document/d/1AYUhQ15IkV8yX_zLNDS0x9Q0l_QY6vOv3aA3f_LHDzU/edit <br>
+            - provides civic information based on residential address <br><br>
+        OpenWeatherMap: https://docs.google.com/document/d/1V-IRbvKGQpJMTfYxsOcew8A-9y9otnKWGP7eXR2bJ6Y/edit <br>
+            - provides weather data given geographic location <br><br>
+      </h6>
+    </div>
   </body>
 </html>
