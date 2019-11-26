@@ -115,7 +115,12 @@
   transition: all 0.5s ease;
 }
 
+<<<<<<< HEAD
+.p1{
+  padding: 50px 50px 50px 50px;
+=======
 .home-top {
   margin: auto;
   text-align: center;
+>>>>>>> 106478c084cb36758408a896553574d40779cd6e
 }
