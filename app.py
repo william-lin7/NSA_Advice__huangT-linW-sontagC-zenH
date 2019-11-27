@@ -15,7 +15,6 @@ app.secret_key = "adsfgt"
 
 session = {}
 userInfo = {}
-userID = -1
 db = 0
 
 @app.route("/")
@@ -40,7 +39,6 @@ def update():
 
 @app.route("/auth", methods = ["POST"])
 def auth():
-    global userID
     if request.form['submit_button'] == "Sign me up":
         if dbase.addUser():
             return redirect(url_for("root"))
@@ -48,44 +46,27 @@ def auth():
             return redirect(url_for("register"))
     if request.form['submit_button'] == "Login":
         if dbase.login():
+            session['user'] = request.form['username'] #stores the user in the session
+            f = open("keys.txt", "r") #opens file with the keys
+            keys = f.readlines()
+            k = keys[0].split(":")
+            #print(k)
+            #print(k[1].strip())
+            session['google_key'] = k[1].strip()
+            dbase.fillUserInfo(userInfo)
             return redirect(url_for("home"))
         else:
             return redirect(url_for("login"))
     if request.form['submit_button'] == "Update Info":
-        dbfile = "data.db"
-        db = sqlite3.connect(dbfile)
-        c = db.cursor() #above three lines allow sqlite commands to be performed from python script
-        blank = True
-        arr = ['firstName','lastName','username','password','email','phoneNum','location']
-        idx = 0
-        while idx < len(arr):
-            if arr[idx] == 'username' or arr[idx] == 'password':
-                if request.form[arr[idx]] != "":
-                    command = "UPDATE users SET \"{}\" = \"{}\" WHERE id = {};"
-                    c.execute(command.format(arr[idx],request.form[arr[idx]],userID))
-                    session['user'] = request.form['username']
-                    blank = False
-                    db.commit()
-            else:
-                if request.form[arr[idx]] != "":
-                    command = "UPDATE info SET \"{}\" = \"{}\" WHERE id = {};"
-                    c.execute(command.format(arr[idx],request.form[arr[idx]],userID))
-                    blank = False
-                    db.commit()
-            idx += 1
-        if not blank:
-            flash("Update Success!")
-        else:
-            flash("Nothing has been updated.")
-        fillUserInfo()
-        db.close()
+        dbase.update()
+        dbase.fillUserInfo(userInfo)
         return redirect(url_for("home"))
 
 @app.route("/logout")
 def logout():
     if 'user' in session:
         session.pop('user')
-        userID = -1
+        dbase.userID = -1
     flash("Logout Success!")
     flash("index")
     return redirect(url_for("root"))
@@ -93,7 +74,7 @@ def logout():
 @app.route("/home")
 def home(): #display home page of website
     if 'user' in session:
-        fillUserInfo()
+        dbase.fillUserInfo(userInfo)
         return render_template(
             "homepage.html",
             google_key = session['google_key'],
@@ -135,28 +116,6 @@ def weather():
     else:
         flash("Location required. Please enter a city name.")
         return redirect(url_for("home"))
-
-
-def getTableLen(tbl): #returns the length of a table
-    dbfile = "data.db"
-    db = sqlite3.connect(dbfile)
-    c = db.cursor()
-    command = "SELECT COUNT(*) FROM {};"
-    q = c.execute(command.format(tbl))
-    for line in q:
-        return line[0]
-
-def fillUserInfo():
-    dbfile = "data.db"
-    db = sqlite3.connect(dbfile)
-    c = db.cursor()
-    q = c.execute("SELECT * FROM info WHERE id = {}".format(userID))
-    for bar in q:
-        userInfo['firstName'] = bar[1]
-        userInfo['lastName'] = bar[2]
-        userInfo['email'] = bar[3]
-        userInfo['phoneNum'] = bar[4]
-        userInfo['location'] = bar[5]
 
 if __name__ == "__main__":
     app.debug = True

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request,  session, redirect, url_for, flash
 import sqlite3 # enable control of an sqlite database
 
+userID = -1
 db=0
 
 def addUser():
@@ -27,6 +28,7 @@ def addUser():
                 return True
 
 def login():
+    global userID
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
@@ -38,15 +40,7 @@ def login():
         listPass = c.execute(getPass.format(bar[0][1][1]))
         for p in listPass:
             if request.form['password'] == p[0]: #correct username and password
-                session['user'] = request.form['username'] #stores the user in the session
                 userID = bar[0][1][0]
-                f = open("keys.txt", "r") #opens file with the keys
-                keys = f.readlines()
-                k = keys[0].split(":")
-                #print(k)
-                #print(k[1].strip())
-                session['google_key'] = k[1].strip()
-                fillUserInfo()
                 return True
             else:
                 flash("Error! Incorrect password")
@@ -81,7 +75,6 @@ def update():
         flash("Update Success!")
     else:
         flash("Nothing has been updated.")
-    fillUserInfo()
     db.commit()
     db.close()
 
@@ -94,14 +87,14 @@ def getTableLen(tbl): #returns the length of a table
     for line in q:
         return line[0]
 
-def fillUserInfo():
+def fillUserInfo(arr):
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
     q = c.execute("SELECT * FROM info WHERE id = {}".format(userID))
     for bar in q:
-        userInfo['firstName'] = bar[1]
-        userInfo['lastName'] = bar[2]
-        userInfo['email'] = bar[3]
-        userInfo['phoneNum'] = bar[4]
-        userInfo['location'] = bar[5]
+        arr['firstName'] = bar[1]
+        arr['lastName'] = bar[2]
+        arr['email'] = bar[3]
+        arr['phoneNum'] = bar[4]
+        arr['location'] = bar[5]
