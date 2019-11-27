@@ -3,22 +3,6 @@ import sqlite3 # enable control of an sqlite database
 
 db=0
 
-def init():
-    dbfile = "data.db"
-    db = sqlite3.connect(dbfile)
-    c = db.cursor()
-
-def exit():
-    db.commit()
-    db.close()
-
-def example():
-    c = init()
-    c.execute('whatever')
-    exit()
-
-#---------------------------------
-
 def addUser():
     if request.form['password'] != request.form['password2']:
         flash("Error! Passwords do not match")
@@ -35,23 +19,12 @@ def addUser():
                 return False
             else:
                 id = getTableLen("users") #gives the user the next availabe id
-                c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), "")) #different version of format
+                c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), "", "")) #different version of format
                 db.commit()
                 db.close()
                 flash("Register Success!")
                 flash("index") #Why flash index?
                 return True
-        if bar[0] > 0:
-            flash("Username is already taken. Please choose another one.")
-            return False
-        else:
-            id = getTableLen("users") #gives the user the next availabe id
-            c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), "", "")) #different version of format
-            db.commit()
-            db.close()
-            flash("Register Success!")
-            flash("index") #Why flash index?
-            return True
 
 def login():
     dbfile = "data.db"
@@ -85,7 +58,7 @@ def login():
 def update():
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
-    c = db.cursor()c = db.cursor()
+    c = db.cursor()
     blank = True
     arr = ['firstName','lastName','username','password','email','phoneNum','location']
     idx = 0
@@ -120,3 +93,15 @@ def getTableLen(tbl): #returns the length of a table
     q = c.execute(command.format(tbl))
     for line in q:
         return line[0]
+
+def fillUserInfo():
+    dbfile = "data.db"
+    db = sqlite3.connect(dbfile)
+    c = db.cursor()
+    q = c.execute("SELECT * FROM info WHERE id = {}".format(userID))
+    for bar in q:
+        userInfo['firstName'] = bar[1]
+        userInfo['lastName'] = bar[2]
+        userInfo['email'] = bar[3]
+        userInfo['phoneNum'] = bar[4]
+        userInfo['location'] = bar[5]

@@ -106,3 +106,6 @@ tylerH -- 2019-11-26 9:00
   williamL -- 2019-11-20 9:24
     - create the "About" and "How to Use" pages along with navbars for every page
         - filled in info for both page
+
+tylerH -- 2019-11-27 8:50
+  - worked on moving fuctions in app.py to db.py

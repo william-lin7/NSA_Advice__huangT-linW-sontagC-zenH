@@ -42,34 +42,14 @@ def update():
 def auth():
     global userID
     if request.form['submit_button'] == "Sign me up":
-        dbase.addUser()
-    if request.form['submit_button'] == "Login":
-        dbfile = "data.db"
-        db = sqlite3.connect(dbfile)
-        c = db.cursor() #above three lines allow sqlite commands to be performed from python script
-        command = "SELECT * FROM users WHERE username = \"{}\";"
-        listUsers = c.execute(command.format(request.form['username'])) #fills in brackets with the given username and executes it in sqlite
-        bar = list(enumerate(listUsers))
-        if len(bar) > 0: #checks whether there exists a user with the given username
-            getPass = "SELECT password FROM users WHERE username = \"{}\";"
-            listPass = c.execute(getPass.format(bar[0][1][1]))
-            for p in listPass:
-                if request.form['password'] == p[0]: #correct username and password
-                    session['user'] = request.form['username'] #stores the user in the session
-                    userID = bar[0][1][0]
-                    f = open("keys.txt", "r") #opens file with the keys
-                    keys = f.readlines()
-                    k = keys[0].split(":")
-                    #print(k)
-                    #print(k[1].strip())
-                    session['google_key'] = k[1].strip()
-                    fillUserInfo()
-                    return redirect(url_for("home"))
-                else:
-                    flash("Error! Incorrect password")
-                    return redirect(url_for("login"))
+        if dbase.addUser():
+            return redirect(url_for("root"))
         else:
-            flash("Error! Incorrect username")
+            return redirect(url_for("register"))
+    if request.form['submit_button'] == "Login":
+        if dbase.login():
+            return redirect(url_for("home"))
+        else:
             return redirect(url_for("login"))
     if request.form['submit_button'] == "Update Info":
         dbfile = "data.db"
