@@ -36,7 +36,8 @@ def addUser():
             else:
                 id = getTableLen("users") #gives the user the next availabe id
                 c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), "")) #different version of format
-                exit()
+                db.commit()
+                db.close()
                 flash("Register Success!")
                 flash("index") #Why flash index?
                 return True
@@ -46,13 +47,16 @@ def addUser():
         else:
             id = getTableLen("users") #gives the user the next availabe id
             c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), "", "")) #different version of format
-            exit()
+            db.commit()
+            db.close()
             flash("Register Success!")
             flash("index") #Why flash index?
             return True
 
 def login():
-    c = init()
+    dbfile = "data.db"
+    db = sqlite3.connect(dbfile)
+    c = db.cursor()
     command = "SELECT * FROM users WHERE username = \"{}\";"
     listUsers = c.execute(command.format(request.form['username'])) #fills in brackets with the given username and executes it in sqlite
     bar = list(enumerate(listUsers))
@@ -79,7 +83,9 @@ def login():
         return False
 
 def update():
-    c = init()
+    dbfile = "data.db"
+    db = sqlite3.connect(dbfile)
+    c = db.cursor()c = db.cursor()
     blank = True
     arr = ['firstName','lastName','username','password','email','phoneNum','location']
     idx = 0
@@ -103,10 +109,13 @@ def update():
     else:
         flash("Nothing has been updated.")
     fillUserInfo()
-    exit()
+    db.commit()
+    db.close()
 
 def getTableLen(tbl): #returns the length of a table
-    c = init()
+    dbfile = "data.db"
+    db = sqlite3.connect(dbfile)
+    c = db.cursor()
     command = "SELECT COUNT(*) FROM {};"
     q = c.execute(command.format(tbl))
     for line in q:
