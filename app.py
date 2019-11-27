@@ -8,6 +8,7 @@ from flask import Flask, render_template, request,  session, redirect, url_for, 
 import sqlite3
 import urllib, json
 import api
+import db as dbase
 app = Flask(__name__)
 app = Flask(__name__)
 app.secret_key = "adsfgt"
@@ -41,28 +42,7 @@ def update():
 def auth():
     global userID
     if request.form['submit_button'] == "Sign me up":
-        if request.form['password'] != request.form['password2']:
-            flash("Error! Passwords do not match")
-            return redirect(url_for("register"))
-        else:
-            dbfile = "data.db"
-            db = sqlite3.connect(dbfile)
-            c = db.cursor() #standard connection
-            command = "SELECT COUNT(*) FROM users WHERE username = \"{}\";"
-            newUser = c.execute(command.format(request.form['username'])) #execution of sqlite command with the given username instead of the brackets
-            for bar in newUser:
-                if bar[0] > 0:
-                    flash("Username is already taken. Please choose another one.")
-                    return redirect(url_for("register"))
-                else:
-                    id = getTableLen("users") #gives the user the next availabe id
-                    c.execute("INSERT INTO users VALUES(?, ?, ?);", (id, request.form['username'], request.form['password'])) #different version of format
-                    c.execute("INSERT INTO info VALUES(?, ?, ?, ?, ?, ?)", (id, request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), ""))
-                    db.commit()
-                    db.close()
-                    flash("Register Success!")
-                    flash("index")
-                    return redirect(url_for("home"))
+        dbase.addUser()
     if request.form['submit_button'] == "Login":
         dbfile = "data.db"
         db = sqlite3.connect(dbfile)

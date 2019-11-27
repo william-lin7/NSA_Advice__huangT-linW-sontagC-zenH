@@ -1,3 +1,4 @@
+from flask import Flask, render_template, request,  session, redirect, url_for, flash
 import sqlite3 # enable control of an sqlite database
 
 db=0
@@ -5,38 +6,40 @@ db=0
 def init():
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
-    return db.cursor()
+    c = db.cursor()
 
 def exit():
     db.commit()
     db.close()
-    
+
 def example():
     c = init()
     c.execute('whatever')
     exit()
 
----------------------------------
+#---------------------------------
 
 def addUser():
     if request.form['password'] != request.form['password2']:
         flash("Error! Passwords do not match")
         return False
     else:
-        c = init() #standard connection
+        dbfile = "data.db"
+        db = sqlite3.connect(dbfile)
+        c = db.cursor() #standard connection
         command = "SELECT COUNT(*) FROM users WHERE username = \"{}\";"
         newUser = c.execute(command.format(request.form['username'])) #execution of sqlite command with the given username instead of the brackets
         for bar in newUser:
-        if bar[0] > 0:
-            flash("Username is already taken. Please choose another one.")
-            return False
-        else:
-            id = getTableLen("users") #gives the user the next availabe id
-            c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), "")) #different version of format
-            exit()
-            flash("Register Success!")
-            flash("index") #Why flash index?
-            return True
+            if bar[0] > 0:
+                flash("Username is already taken. Please choose another one.")
+                return False
+            else:
+                id = getTableLen("users") #gives the user the next availabe id
+                c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), "")) #different version of format
+                exit()
+                flash("Register Success!")
+                flash("index") #Why flash index?
+                return True
 def login():
     c = init()
     command = "SELECT * FROM users WHERE username = \"{}\";"
@@ -90,3 +93,10 @@ def update():
         flash("Nothing has been updated.")
     fillUserInfo()
     exit()
+
+def getTableLen(tbl): #returns the length of a table
+    c = init()
+    command = "SELECT COUNT(*) FROM {};"
+    q = c.execute(command.format(tbl))
+    for line in q:
+        return line[0]
