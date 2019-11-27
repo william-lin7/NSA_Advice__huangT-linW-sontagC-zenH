@@ -1,77 +1,122 @@
-# Matthew Chan (PM), Hannah Fried, Coby Sontag, Jionghao Wu [Team SOS]
-# SoftDev1 pd2
-# P00 -- Da Art of Storytellin'
-# 2019-10-28
-
+from flask import Flask, render_template, request,  session, redirect, url_for, flash
 import sqlite3 # enable control of an sqlite database
 
-def uniqueTitle(curse, title): # return a boolean for whether or not a given title matches one already in the table.
-    repeats = curse.execute("SELECT Title FROM stories;")
-    for names in repeats:
-        if (names[0] == title):
+db=0
+
+def init():
+    dbfile = "data.db"
+    db = sqlite3.connect(dbfile)
+    c = db.cursor()
+
+def exit():
+    db.commit()
+    db.close()
+
+def example():
+    c = init()
+    c.execute('whatever')
+    exit()
+
+#---------------------------------
+
+def addUser():
+    if request.form['password'] != request.form['password2']:
+        flash("Error! Passwords do not match")
+        return False
+    else:
+        dbfile = "data.db"
+        db = sqlite3.connect(dbfile)
+        c = db.cursor() #standard connection
+        command = "SELECT COUNT(*) FROM users WHERE username = \"{}\";"
+        newUser = c.execute(command.format(request.form['username'])) #execution of sqlite command with the given username instead of the brackets
+        for bar in newUser:
+            if bar[0] > 0:
+                flash("Username is already taken. Please choose another one.")
+                return False
+            else:
+                id = getTableLen("users") #gives the user the next availabe id
+                c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), "")) #different version of format
+                db.commit()
+                db.close()
+                flash("Register Success!")
+                flash("index") #Why flash index?
+                return True
+        if bar[0] > 0:
+            flash("Username is already taken. Please choose another one.")
             return False
-    return True
+        else:
+            id = getTableLen("users") #gives the user the next availabe id
+            c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), "", "")) #different version of format
+            db.commit()
+            db.close()
+            flash("Register Success!")
+            flash("index") #Why flash index?
+            return True
 
-def uniqueUsername(curse, username): # return a boolean for whether or not a given username matches one already in the table
-    repeats = curse.execute("SELECT Username FROM users;")
-    for names in repeats:
-        if (names[0] == username):
-            return False
-    return True
+def login():
+    dbfile = "data.db"
+    db = sqlite3.connect(dbfile)
+    c = db.cursor()
+    command = "SELECT * FROM users WHERE username = \"{}\";"
+    listUsers = c.execute(command.format(request.form['username'])) #fills in brackets with the given username and executes it in sqlite
+    bar = list(enumerate(listUsers))
+    if len(bar) > 0: #checks whether there exists a user with the given username
+        getPass = "SELECT password FROM users WHERE username = \"{}\";"
+        listPass = c.execute(getPass.format(bar[0][1][1]))
+        for p in listPass:
+            if request.form['password'] == p[0]: #correct username and password
+                session['user'] = request.form['username'] #stores the user in the session
+                userID = bar[0][1][0]
+                f = open("keys.txt", "r") #opens file with the keys
+                keys = f.readlines()
+                k = keys[0].split(":")
+                #print(k)
+                #print(k[1].strip())
+                session['google_key'] = k[1].strip()
+                fillUserInfo()
+                return True
+            else:
+                flash("Error! Incorrect password")
+                return False
+    else:
+        flash("Error! Incorrect username")
+        return False
 
-def addUser(curse, username, password): # add a row to the users database, with the given username/passwrd combo. Return nothing.
-    curse.execute("INSERT INTO users (Username, Password) VALUES('%s', '%s');" % (username, password))
+def update():
+    dbfile = "data.db"
+    db = sqlite3.connect(dbfile)
+    c = db.cursor()c = db.cursor()
+    blank = True
+    arr = ['firstName','lastName','username','password','email','phoneNum','location']
+    idx = 0
+    while idx < len(arr):
+        if arr[idx] == 'username' or arr[idx] == 'password':
+            if request.form[arr[idx]] != "":
+                command = "UPDATE users SET \"{}\" = \"{}\" WHERE id = {};"
+                c.execute(command.format(arr[idx],request.form[arr[idx]],userID))
+                session['user'] = request.form['username']
+                blank = False
+                db.commit()
+        else:
+            if request.form[arr[idx]] != "":
+                command = "UPDATE info SET \"{}\" = \"{}\" WHERE id = {};"
+                c.execute(command.format(arr[idx],request.form[arr[idx]],userID))
+                blank = False
+                db.commit()
+        idx += 1
+    if not blank:
+        flash("Update Success!")
+    else:
+        flash("Nothing has been updated.")
+    fillUserInfo()
+    db.commit()
+    db.close()
 
-def addEntry(curse, title, entry, author): # add a row to the stories database, with the given title/entry/author combo. Return nothing.
-    print("\nTitle: "+title+"\nText: "+entry+"\nAuthor: "+author+"\n")#debug statement
-    curse.execute("INSERT INTO stories (Title, Entries, Author) VALUES('%s', '%s', '%s');" % (title, entry, author))
-
-def authenticate(curse, username, password): # return true if the username/password combo exists within the database, otherwise return false.
-    givenUser = (username, password)
-    cursorObject = curse.execute("SELECT Password FROM users WHERE Username = '%s';" % username)
-    for passwordTuple in cursorObject:
-        if (passwordTuple[0] != password):
-            return False
-        return True
-    return False
-
-def getFullStory(curse, title): # return a list of every entry associated with a story within a list for the story
-    textEntries = []
-    cursorObject = curse.execute("SELECT Entries FROM stories WHERE Title = '%s';" % title)
-    for storyTuple in cursorObject:
-        textEntries.append(storyTuple[0])
-    return textEntries
-
-def lastEntry(curse, title):
-    mostRecentEntry = ""
-    cursorObject = curse.execute("SELECT Entries FROM stories WHERE Title = '%s';" % title)
-    for storyTuple in cursorObject:
-        mostRecentEntry = storyTuple[0]
-    return mostRecentEntry
-
-def getContributedStories(curse, username): # return a list of the titles of every story contributed to by an author
-    contributedStories = []
-    cursorObject = curse.execute("SELECT Title FROM stories WHERE Author = '%s';" % username)
-    for titleTuple in cursorObject:
-        if (titleTuple[0] not in contributedStories):
-            contributedStories.append(titleTuple[0])
-        print(contributedStories)
-    return contributedStories
-
-def getOtherStories(curse, username): # return a list of the titles of every NOT story contributed to by an author
-    notContributedStories = []
-    executionStr = ("SELECT Title FROM stories WHERE Author != '%s'" % username)
-    for contrTitle in getContributedStories(curse, username):
-        executionStr += ("AND Title != '%s'" % contrTitle)
-    cursorObject = curse.execute(executionStr)
-    for titlesTuple in cursorObject:
-        if (titlesTuple[0] not in notContributedStories):
-            notContributedStories.append(titlesTuple[0])
-    return notContributedStories
-
-def getTitlesAndStories(curse, username):
-    titlesToStories = dict()
-    storytitles = getContributedStories(curse, username)
-    for titles in storytitles:
-        titlesToStories[titles] = getFullStory(curse,titles)
-    return titlesToStories
+def getTableLen(tbl): #returns the length of a table
+    dbfile = "data.db"
+    db = sqlite3.connect(dbfile)
+    c = db.cursor()
+    command = "SELECT COUNT(*) FROM {};"
+    q = c.execute(command.format(tbl))
+    for line in q:
+        return line[0]
