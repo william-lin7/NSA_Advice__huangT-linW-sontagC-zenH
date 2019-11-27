@@ -40,6 +40,17 @@ def addUser():
                 flash("Register Success!")
                 flash("index") #Why flash index?
                 return True
+        if bar[0] > 0:
+            flash("Username is already taken. Please choose another one.")
+            return False
+        else:
+            id = getTableLen("users") #gives the user the next availabe id
+            c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), "", "")) #different version of format
+            exit()
+            flash("Register Success!")
+            flash("index") #Why flash index?
+            return True
+
 def login():
     c = init()
     command = "SELECT * FROM users WHERE username = \"{}\";"
