@@ -85,7 +85,7 @@ def login():
 def update():
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
-    c = db.cursor()c = db.cursor()
+    c = db.cursor()
     blank = True
     arr = ['firstName','lastName','username','password','email','phoneNum','location']
     idx = 0
