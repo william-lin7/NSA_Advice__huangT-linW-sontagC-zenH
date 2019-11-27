@@ -15,6 +15,7 @@ app.secret_key = "adsfgt"
 session = {}
 userInfo = {}
 userID = -1
+db = 0
 
 @app.route("/")
 def root():
