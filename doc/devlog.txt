@@ -62,6 +62,7 @@ tylerH -- 2019-11-23 20:08
 - changed the way to update information in auth route by using a while loop instead of hard coding
 
 
+williamL -- 2019-11-25 9:24
 HOME STRETCH PLAN
 
 Things left to do:
@@ -103,6 +104,9 @@ tylerH -- 2019-11-26 9:00
   - added a route to display the weather of the location
   - added 404 error handling to weather route
 
-  williamL -- 2019-11-20 9:24
-    - create the "About" and "How to Use" pages along with navbars for every page
-        - filled in info for both page
+williamL -- 2019-11-26 9:24
+  - create the "About" and "How to Use" pages along with navbars for every page
+      - filled in info for both page
+
+williamL -- 2019-11-27
+  - created contact footer
