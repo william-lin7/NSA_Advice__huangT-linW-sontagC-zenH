@@ -104,15 +104,13 @@ tylerH -- 2019-11-26 9:00
   - added a route to display the weather of the location
   - added 404 error handling to weather route
 
-<<<<<<< HEAD
   williamL -- 2019-11-20 9:24
     - create the "About" and "How to Use" pages along with navbars for every page
         - filled in info for both page
 
 tylerH -- 2019-11-27 8:50
   - worked on moving fuctions in app.py to db.py
-=======
-<<<<<<< HEAD
+
 williamL -- 2019-11-26 9:24
   - create the "About" and "How to Use" pages along with navbars for every page
       - filled in info for both page
@@ -131,4 +129,3 @@ cobyS -- 2019-11-27 9:07
     - Adding API functions to api.py as a helper function
     - Added IPs to our DB, in db.py functions and reset.py
     Older updates: FullContact API works but returns disappointing amounts of data, Twitter works if we have website for callbacks
->>>>>>> e3a2cdbc54d13d9a42d1442907cf33cf8d52a4a5
