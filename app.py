@@ -105,7 +105,15 @@ def weather():
             u = urllib.request.urlopen(url.format(loc))
             response = u.read()
             data = json.loads(response)
-            return render_template("weather.html", info = data)
+            return render_template("weather.html",
+                                    info = data,
+                                    weather = data["weather"][0]["main"],
+                                    temp = format((data["main"]["temp"] - 273) * (9/5) + 32, ".1f"),
+                                    description = data["weather"][0]["description"],
+                                    wind = data["wind"]["speed"],
+                                    pressure = data["main"]["pressure"],
+                                    humidity = data["main"]["pressure"]
+                                    )
         except urllib.error.HTTPError as e:
             if e.code == 404:
                 flash("Error! Invalid city name")
