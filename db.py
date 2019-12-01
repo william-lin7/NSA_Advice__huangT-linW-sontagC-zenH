@@ -98,7 +98,7 @@ def fillUserInfo():
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
-    q = c.execute("SELECT * FROM info WHERE id = {}".format(userID))
+    q = c.execute("SELECT * FROM info WHERE id = {};".format(userID))
     for bar in q:
         userInfo['firstName'] = bar[1]
         userInfo['lastName'] = bar[2]
