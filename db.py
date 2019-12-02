@@ -57,19 +57,12 @@ def update():
     arr = ['firstName','lastName','username','password','email','phoneNum','location']
     idx = 0
     while idx < len(arr):
-        if arr[idx] == 'username' or arr[idx] == 'password':
-            if request.form[arr[idx]] != "":
-                command = "UPDATE users SET \"{}\" = \"{}\" WHERE id = {};"
-                c.execute(command.format(arr[idx],request.form[arr[idx]],userID))
-                session['user'] = request.form['username']
-                blank = False
-                db.commit()
-        else:
-            if request.form[arr[idx]] != "":
-                command = "UPDATE info SET \"{}\" = \"{}\" WHERE id = {};"
-                c.execute(command.format(arr[idx],request.form[arr[idx]],userID))
-                blank = False
-                db.commit()
+        if request.form[arr[idx]] != "":
+            command = "UPDATE users SET \"{}\" = \"{}\" WHERE id = {};"
+            c.execute(command.format(arr[idx],request.form[arr[idx]],userID))
+            session['user'] = request.form['username']
+            blank = False
+            db.commit()
         idx += 1
     if not blank:
         flash("Update Success!")
@@ -91,10 +84,20 @@ def fillUserInfo(arr):
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
-    q = c.execute("SELECT * FROM info WHERE id = {};".format(userID))
+    q = c.execute("SELECT * FROM users WHERE id = {};".format(userID))
     for bar in q:
-        arr['firstName'] = bar[1]
-        arr['lastName'] = bar[2]
-        arr['email'] = bar[3]
-        arr['phoneNum'] = bar[4]
-        arr['location'] = bar[5]
+        arr['firstName'] = bar[3]
+        arr['lastName'] = bar[4]
+        arr['email'] = bar[5]
+        arr['phoneNum'] = bar[6]
+        arr['location'] = bar[7]
+
+def getAPIKey(api):
+    key = ""
+    dbfile = "data.db"
+    db = sqlite3.connect(dbfile)
+    c = db.cursor()
+    q = c.execute("SELECT \"{}\" FROM users WHERE id = {};".format(api,userID))
+    for bar in q:
+        key = bar[0]
+    return key

@@ -96,6 +96,7 @@ def howToUse():
 
 @app.route("/weather")
 def weather():
+    key = dbase.getAPIKey('weatherAPI')
     url = "http://api.openweathermap.org/data/2.5/weather?q={}&APPID=da19d101a993403bd4ab9a3284ec0f0d"
     if userInfo['location'] != "":
         loc = userInfo['location']
