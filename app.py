@@ -125,6 +125,46 @@ def weather():
         flash("Location required. Please enter a city name.")
         return redirect(url_for("home"))
 
+@app.route("/civicInfo")
+def civicInfo():
+    #Address Format:
+    #345%20Chamber%20St.%20NewYork%20City%20NY
+    urlelections: "https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyCk3JsYEm11AV1n2fGD7CPJ08Z34oRG1Hc&address={}"
+    urlvoterinfo = "https://www.googleapis.com/civicinfo/v2/voterinfo?key=AIzaSyCk3JsYEm11AV1n2fGD7CPJ08Z34oRG1Hc&address={}&electionId={}}"
+    if userInfo['address'] != "":
+        addr = userInfo['address']
+        if ' ' in addr:
+            addr = loc.replace(' ', '%20')
+        try:
+            u1 = urllib.request.urlopen(urlelections.format(addr))
+            response1 = u.read()
+            data1 = json.loads(response1)
+            elections = data1["elections"]
+            id = []
+            name = []
+            for election in elections:
+                id.append(election["id"])
+                name.append(election["name"])
+            vinfo = []
+            for elecid in id:
+                u2 = urllib.request.urlopen(urlvoterinfo.format(addr, elecid))
+                response2 = u.read()
+                data2 = json.loads(response2)
+                vinfo.append(data2)
+            return render_template("civicInfo.html",
+                            name = name,
+                            vinfo = vinfo)
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                flash("Error! Invalid address")
+                return redirect(url_for("home"))
+            else:
+                flash("Not 404 error.")
+                return redirect(url_for("home"))
+    else:
+        flash("Address required. Please enter an address.")
+        return redirect(url_for("home"))
+
 if __name__ == "__main__":
     app.debug = True
     app.run()

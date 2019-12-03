@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Compressed CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+    <link rel="stylesheet" href="../static/stylesheets/app.css">
+    <title>Civic Info</title>
+  </head>
+  <body>
+    Elections Near You: <br>
+    {% for i in name %}
+      {{i}} <br>
+    {% endfor %} <br>
+    {% for i in vinfo %}
+      Election: {{i["election"]["name"]}} <br>
+
+      Polling Locations: <br>
+      {% for j in i["pollingLocations"] %}
+        {{ j["locationName"] }}<br>
+        {{ j["line1"] }}, {{j["city"]}}, {{j["state"]}} , {{j["zip"]}}
+      {%endfor%}
+
+      Contests: <br>
+      {% for j in i["contests"] %}
+        Office: <br>
+        {{ j["office"] }}
+        District: <br>
+        {{ j["district"] }}
+        Candidates: <br>
+        {% for k in j["candidates"] %}
+          Name: {{k["name"]}} <br>
+          Party: {{k["name"]}}
+          <a href = {{k["candidateUrl"]}}> More Info </a> <br>
+        {%endfor%}
+      {%endfor%}
+    {%endfor%}
+  </body>
+</html>
