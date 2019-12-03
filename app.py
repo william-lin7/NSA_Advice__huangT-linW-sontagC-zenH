@@ -130,7 +130,6 @@ def weather():
         flash("Location required. Please enter a city name.")
         return redirect(url_for("home"))
 
-<<<<<<< HEAD
 @app.route("/civicInfo")
 def civicInfo():
     return render_template("civicInfo.html")
@@ -198,7 +197,7 @@ def representatives():
     else:
         flash("Address required. Please enter an address.")
         return redirect(url_for("home"))
-=======
+
 @app.route("/keys")
 def keys():
     if 'user' in session:
@@ -208,7 +207,7 @@ def keys():
                                 gckey = dbase.getAPIKey('googleCivic'))
     else:
         return redirect(url_for("root"))
->>>>>>> f2e771820973087297aeaf17d9f7dc682b6463c6
+
 
 if __name__ == "__main__":
     app.debug = True
