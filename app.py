@@ -49,12 +49,6 @@ def auth():
     if request.form['submit_button'] == "Login": #if sent here by lgging in
         if dbase.login():
             session['user'] = request.form['username'] #stores the user in the session
-            f = open("keys.txt", "r") #opens file with the keys
-            keys = f.readlines() #following code accesses our google key without having it here in the code
-            k = keys[0].split(":")
-            #print(k)
-            #print(k[1].strip())
-            session['google_key'] = k[1].strip()
             dbase.fillUserInfo(userInfo) #gives easy access to user information via userInfo variable
             return redirect(url_for("home"))
         else:
