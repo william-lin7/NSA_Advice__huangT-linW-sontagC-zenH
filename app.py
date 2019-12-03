@@ -82,7 +82,8 @@ def home(): #display home page of website
             name = userInfo['firstName'] + " " + userInfo['lastName'],
             email = userInfo['email'],
             pnum = userInfo['phoneNum'],
-            loc = userInfo['location'])
+            loc = userInfo['location'],
+            address = userInfo['address'])
     else:
         return redirect(url_for("root"))
 
