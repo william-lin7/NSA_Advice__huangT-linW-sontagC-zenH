@@ -74,6 +74,29 @@ def logout():
 def home(): #display home page of website
     if 'user' in session:
         dbase.fillUserInfo(userInfo) #grabs user info
+        key = dbase.getAPIKey('locationIQ')
+        url = "https://us1.locationiq.com/v1/search.php?key={}&q={}&format=json"
+        lat = 0
+        lon = 0
+        if userInfo['address'] != "":
+            addr = userInfo['address']
+            if ' ' in addr:
+                addr = addr.replace(' ', '%20')
+            try:
+                u = urllib.request.urlopen(url.format(key,addr))
+                response = u.read()
+                data = json.loads(response)
+                lat = data[0]["lat"]
+                lon = data[0]["lon"]
+            except urllib.error.HTTPError as e:
+                if e.code == 404:
+                    flash("Error! Invalid Address. Map unavailable.")
+                elif e.code == 401:
+                    flash("Error! Invalid API Key. Map unavailable.")
+                else:
+                    flash("Error! Map unavailable.")
+        else:
+            flash("Address required for map. Please enter an address")
         return render_template(
             "homepage.html",
             googleCivic = dbase.getAPIKey("googleCivic"),
@@ -84,7 +107,9 @@ def home(): #display home page of website
             email = userInfo['email'],
             pnum = userInfo['phoneNum'],
             loc = userInfo['location'],
-            address = userInfo['address'])#fills out page with all of a users info
+            address = userInfo['address'],#fills out page with all of a users info
+            lat = lat,
+            lon = lon)
     else:
         return redirect(url_for("root"))
 
@@ -212,11 +237,12 @@ def representatives():
 @app.route("/places")
 def places():
     key = dbase.getAPIKey('locationIQ')
+    key2 = dbase.getAPIKey('googleCivic')
     if key == "":
         flash("Error! Missing API Key")
         return redirect(url_for(root))
     url = "https://us1.locationiq.com/v1/search.php?key={}&q={}&format=json"
-    url2 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={},{}&radius={}&type={}&keyword=cruise&key=AIzaSyCk3JsYEm11AV1n2fGD7CPJ08Z34oRG1Hc"
+    url2 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={}&radius={}&type={}&key={}"
     if userInfo['address'] != "":
         addr = userInfo['address']
         if ' ' in addr:
@@ -227,7 +253,11 @@ def places():
             data = json.loads(response)
             lat = data[0]["lat"]
             lon = data[0]["lon"]
-            return render_template("places.html")
+            u2 = urllib.request.urlopen(url2.format(lat + ',' + lon, 1500, "cafe", key2))
+            response2 = u2.read()
+            data2 = json.loads(response2)
+            return render_template("places.html",
+                                    info = data2["results"])
         except urllib.error.HTTPError as e:
             if e.code == 404:
                 flash("Error! Invalid Address")
