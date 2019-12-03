@@ -148,3 +148,6 @@ williamL -- 2019-12-02 22:07
   - created an option on the home page to check civic information given that an address is entered
   - created page to return elections near address
   - created page to return representatives near address
+
+tylerH -- 2019-12-02 23:00
+  - added a way for api calls to check for api keys before making the calls 

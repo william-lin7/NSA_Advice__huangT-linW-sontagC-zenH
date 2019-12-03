@@ -111,7 +111,7 @@ def updateAPIKey():
     if not blank:
         flash("Key Added Successfully!")
     else:
-        flash("No Key Added.")
+        flash("No Key Added")
     db.commit()
     db.close()
 

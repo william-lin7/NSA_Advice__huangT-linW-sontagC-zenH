@@ -100,14 +100,17 @@ def howToUse():
 
 @app.route("/weather")
 def weather():
-    key = dbase.getAPIKey('weatherAPI')
-    url = "http://api.openweathermap.org/data/2.5/weather?q={}&APPID=da19d101a993403bd4ab9a3284ec0f0d"
+    key = dbase.getAPIKey('openWeather')
+    if key == "":
+        flash("Error! Missing API Key")
+        return redirect(url_for("home"))
+    url = "http://api.openweathermap.org/data/2.5/weather?q={}&APPID={}"
     if userInfo['location'] != "":
         loc = userInfo['location']
         if ' ' in loc:
             loc = loc.replace(' ', '%20')
         try:
-            u = urllib.request.urlopen(url.format(loc))
+            u = urllib.request.urlopen(url.format(loc,key))
             response = u.read()
             data = json.loads(response)
             return render_template("weather.html",
@@ -121,10 +124,13 @@ def weather():
                                     )
         except urllib.error.HTTPError as e:
             if e.code == 404:
-                flash("Error! Invalid city name")
+                flash("Error! Invalid City Name")
+                return redirect(url_for("home"))
+            elif e.code == 401:
+                flash("Error! Invalid API Key")
                 return redirect(url_for("home"))
             else:
-                flash("Not 404 error.")
+                flash("Error!")
                 return redirect(url_for("home"))
     else:
         flash("Location required. Please enter a city name.")
@@ -136,16 +142,17 @@ def civicInfo():
 
 @app.route("/elections")
 def elections():
+    key = dbase.getAPIKey('googleCivic')
     #Address Format:
     #345%20Chamber%20St.%20NewYork%20City%20NY
-    urlelections = "https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyCk3JsYEm11AV1n2fGD7CPJ08Z34oRG1Hc&address={}"
-    urlvoterinfo = "https://www.googleapis.com/civicinfo/v2/voterinfo?key=AIzaSyCk3JsYEm11AV1n2fGD7CPJ08Z34oRG1Hc&address={}&electionId={}"
+    urlelections = "https://www.googleapis.com/civicinfo/v2/elections?key={}&address={}"
+    urlvoterinfo = "https://www.googleapis.com/civicinfo/v2/voterinfo?key={}&address={}&electionId={}"
     if userInfo['address'] != "":
         addr = userInfo['address']
         if ' ' in addr:
             addr = addr.replace(' ', '%20')
         try:
-            u1 = urllib.request.urlopen(urlelections.format(addr))
+            u1 = urllib.request.urlopen(urlelections.format(key,addr))
             response1 = u1.read()
             data1 = json.loads(response1)
             elections = data1["elections"]
@@ -156,7 +163,7 @@ def elections():
                 name.append(election["name"])
             vinfo = []
             for elecid in id:
-                u2 = urllib.request.urlopen(urlvoterinfo.format(addr, elecid))
+                u2 = urllib.request.urlopen(urlvoterinfo.format(key,addr, elecid))
                 response2 = u2.read()
                 data2 = json.loads(response2)
                 vinfo.append(data2)
@@ -165,37 +172,47 @@ def elections():
                             vinfo = vinfo)
         except urllib.error.HTTPError as e:
             if e.code == 404:
-                flash("Error! Invalid address")
+                flash("Error! Invalid Address")
+                return redirect(url_for("home"))
+            elif e.code == 401:
+                flash("Error! Invalid API Key")
                 return redirect(url_for("home"))
             else:
-                flash("Not 404 error.")
+                flash("Error!")
                 return redirect(url_for("home"))
     else:
-        flash("Address required. Please enter an address.")
+        flash("Address required. Please enter an address")
         return redirect(url_for("home"))
 
 @app.route("/representatives")
 def representatives():
-    url = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCk3JsYEm11AV1n2fGD7CPJ08Z34oRG1Hc&address={}"
+    key = dbase.getAPIKey('googleCivic')
+    if key == "":
+        flash("Error! Missing API Key")
+        return redirect(url_for(root))
+    url = "https://www.googleapis.com/civicinfo/v2/representatives?key={}&address={}"
     if userInfo['address'] != "":
         addr = userInfo['address']
         if ' ' in addr:
             addr = addr.replace(' ', '%20')
         try:
-            u = urllib.request.urlopen(url.format(addr))
+            u = urllib.request.urlopen(url.format(key,addr))
             response = u.read()
             data = json.loads(response)
             return render_template("representatives.html",
                                     reps = data["officials"])
         except urllib.error.HTTPError as e:
             if e.code == 404:
-                flash("Error! Invalid address")
+                flash("Error! Invalid Address")
+                return redirect(url_for("home"))
+            elif e.code == 401:
+                flash("Error! Invlaid API Key")
                 return redirect(url_for("home"))
             else:
-                flash("Not 404 error.")
+                flash("Error!")
                 return redirect(url_for("home"))
     else:
-        flash("Address required. Please enter an address.")
+        flash("Address required. Please enter an address")
         return redirect(url_for("home"))
 
 @app.route("/keys")

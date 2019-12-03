@@ -8,6 +8,9 @@ c = db.cursor()               #facilitate db ops
 command = "DROP TABLE IF EXISTS users;" # delete table
 c.execute(command)
 
+command = "DROP TABLE IF EXISTS info;" # delete table
+c.execute(command)
+
 command = "DROP TABLE IF EXISTS apiKeys;" # delete table
 c.execute(command)
 
