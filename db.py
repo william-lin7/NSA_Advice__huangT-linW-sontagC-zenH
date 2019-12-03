@@ -22,6 +22,8 @@ def addUser():
                 id = getTableLen("users") #gives the user the next availabe id
                 c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), "", "", "")) #different version of format
                 db.commit()
+                c.execute("INSERT INTO apiKeys VALUES(?, ?, ?, ?);", (id, "", "", ""))
+                db.commit()
                 db.close()
                 flash("Register Success!")
                 flash("index") #Why flash index?
@@ -85,7 +87,6 @@ def fillUserInfo(arr):
     c = db.cursor()
     q = c.execute("SELECT * FROM users WHERE id = {};".format(userID))
     for bar in q:
-        print(bar)
         arr['firstName'] = bar[3]
         arr['lastName'] = bar[4]
         arr['email'] = bar[5]
@@ -93,12 +94,33 @@ def fillUserInfo(arr):
         arr['location'] = bar[7]
         arr['address'] = bar[9]
 
-def getAPIKey(api):
-    key = ""
+def updateAPIKey():
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
-    q = c.execute("SELECT \"{}\" FROM users WHERE id = {};".format(api,userID))
+    arr = ['openWeather','fullContact','googleCivic']
+    idx = 0
+    blank = True
+    while idx < len(arr):
+        if arr[idx] in request.form and request.form[arr[idx]] != "":
+            command = "UPDATE apiKeys SET \"{}\" = \"{}\" WHERE id = {};"
+            c.execute(command.format(arr[idx],request.form[arr[idx]],userID))
+            blank = False
+            db.commit()
+        idx += 1
+    if not blank:
+        flash("Key Added Successfully!")
+    else:
+        flash("No Key Added.")
+    db.commit()
+    db.close()
+
+def getAPIKey(api):
+    key = ''
+    dbfile = "data.db"
+    db = sqlite3.connect(dbfile)
+    c = db.cursor()
+    q = c.execute("SELECT \"{}\" FROM apiKeys WHERE id = {};".format(api,userID))
     for bar in q:
         key = bar[0]
     return key
