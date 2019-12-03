@@ -141,3 +141,9 @@ tylerH -- 2019-12-02 18:50
   - added an address field to update form and table of users
   - added field to add api keys
   - added a way to show address
+
+williamL -- 2019-12-02 22:07
+  - got the google civic api key to work
+  - created an option on the home page to check civic information given that an address is entered
+  - created page to return elections near address
+  - created page to return representatives near address

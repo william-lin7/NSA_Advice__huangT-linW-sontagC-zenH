@@ -10,32 +10,17 @@
     <title>Civic Info</title>
   </head>
   <body>
-    Elections Near You: <br>
-    {% for i in name %}
-      {{i}} <br>
-    {% endfor %} <br>
-    {% for i in vinfo %}
-      Election: {{i["election"]["name"]}} <br>
-
-      Polling Locations: <br>
-      {% for j in i["pollingLocations"] %}
-        {{ j["locationName"] }}<br>
-        {{ j["line1"] }}, {{j["city"]}}, {{j["state"]}} , {{j["zip"]}}
-      {%endfor%}
-
-      Contests: <br>
-      {% for j in i["contests"] %}
-        Office: <br>
-        {{ j["office"] }}
-        District: <br>
-        {{ j["district"] }}
-        Candidates: <br>
-        {% for k in j["candidates"] %}
-          Name: {{k["name"]}} <br>
-          Party: {{k["name"]}}
-          <a href = {{k["candidateUrl"]}}> More Info </a> <br>
-        {%endfor%}
-      {%endfor%}
-    {%endfor%}
+    <div class="login-box">
+      <div class="row collapse expanded">
+        <div class="small-12 medium-6 column small-order-2 medium-order-1">
+          <form action="/elections">
+            <input class="login-box-submit-button" type="submit" name="submit_button" value="Elections">
+          </form>
+          <form action="/representatives">
+            <input class="login-box-submit-button" type="submit" name="submit_button" value="Representatives">
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
