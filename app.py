@@ -81,8 +81,6 @@ def home(): #display home page of website
             fullContact = '',
             user = session['user'],
             name = userInfo['firstName'] + " " + userInfo['lastName'],
-            email = userInfo['email'],
-            pnum = userInfo['phoneNum'],
             loc = userInfo['location'],
             address = userInfo['address'])#fills out page with all of a users info
     else:
