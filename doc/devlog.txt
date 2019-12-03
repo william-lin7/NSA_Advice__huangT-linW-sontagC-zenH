@@ -141,4 +141,4 @@ tylerH -- 2019-12-02 18:50
   - added an address field to update form and table of users
   - added field to add api keys
   - added a way to show address
-  
+  - added a new html page for users to either update an existing api key or add a new key
