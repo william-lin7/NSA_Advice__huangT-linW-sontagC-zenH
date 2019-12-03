@@ -229,6 +229,9 @@ def representatives():
         flash("Address required. Please enter an address")
         return redirect(url_for("home"))
 
+def searchType():
+    return request.form["cafe"]
+
 @app.route("/places")
 def places():
     key = dbase.getAPIKey('locationIQ')
@@ -239,6 +242,8 @@ def places():
         return redirect(url_for(root))
     url = "https://us1.locationiq.com/v1/search.php?key={}&q={}&format=json"
     url2 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={}&radius={}&type={}&key={}"
+    type = searchType()
+    print(type)
     if userInfo['address'] != "":
         addr = userInfo['address']
         if ' ' in addr:
@@ -249,7 +254,7 @@ def places():
             data = json.loads(response)
             lat = data[0]["lat"]
             lon = data[0]["lon"]
-            u2 = urllib.request.urlopen(url2.format(lat + ',' + lon, 1500, "cafe", key2))
+            u2 = urllib.request.urlopen(url2.format(lat + ',' + lon, 1500, type, key2))
             response2 = u2.read()
             data2 = json.loads(response2)
             return render_template("places.html",
