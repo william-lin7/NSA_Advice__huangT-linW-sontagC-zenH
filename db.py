@@ -20,9 +20,9 @@ def addUser():
                 return False
             else:
                 id = getTableLen("users") #gives the user the next availabe id
-                c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), "", "", "")) #different version of format
+                c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], "", "")) #different version of format
                 db.commit()
-                c.execute("INSERT INTO apiKeys VALUES(?, ?, ?, ?, ?);", (id, "", "", "", ""))
+                c.execute("INSERT INTO apiKeys VALUES(?, ?, ?, ?);", (id, "", "", ""))
                 db.commit()
                 db.close()
                 flash("Register Success!")
@@ -56,7 +56,7 @@ def update():
     db = sqlite3.connect(dbfile)
     c = db.cursor()
     blank = True
-    arr = ['firstName','lastName','username','password','email','phoneNum','location', 'address']
+    arr = ['firstName','lastName','username','password','location', 'address']
     idx = 0
     while idx < len(arr):
         if request.form[arr[idx]] != "":
@@ -89,16 +89,15 @@ def fillUserInfo(arr):
     for bar in q:
         arr['firstName'] = bar[3]
         arr['lastName'] = bar[4]
-        arr['email'] = bar[5]
-        arr['phoneNum'] = bar[6]
-        arr['location'] = bar[7]
-        arr['address'] = bar[9]
+        arr['location'] = bar[5]
+        arr['address'] = bar[6]
 
 def updateAPIKey():
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
-    arr = ['openWeather','fullContact','googleCivic', 'locationIQ', 'googleMaps']
+    arr = ['openWeather', 'googleCivic', 'locationIQ', 'googleMaps']
+    arr = ['openWeather', 'googleCivic', 'locationIQ']
     idx = 0
     blank = True
     while idx < len(arr):

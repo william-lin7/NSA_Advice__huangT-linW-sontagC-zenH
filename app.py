@@ -49,12 +49,6 @@ def auth():
     if request.form['submit_button'] == "Login": #if sent here by lgging in
         if dbase.login():
             session['user'] = request.form['username'] #stores the user in the session
-            f = open("keys.txt", "r") #opens file with the keys
-            keys = f.readlines() #following code accesses our google key without having it here in the code
-            k = keys[0].split(":")
-            #print(k)
-            #print(k[1].strip())
-            session['google_key'] = k[1].strip()
             dbase.fillUserInfo(userInfo) #gives easy access to user information via userInfo variable
             return redirect(url_for("home"))
         else:
@@ -85,11 +79,8 @@ def home(): #display home page of website
             googleCivic = dbase.getAPIKey("googleCivic"),
             openWeather = dbase.getAPIKey("openWeather"),
             mapskey = dbase.getAPIKey('googleMaps'),
-            fullContact = '',
             user = session['user'],
             name = userInfo['firstName'] + " " + userInfo['lastName'],
-            email = userInfo['email'],
-            pnum = userInfo['phoneNum'],
             loc = userInfo['location'],
             address = userInfo['address'])#fills out page with all of a users info
     else:
@@ -254,7 +245,6 @@ def keys():
     if 'user' in session:
         return render_template("keys.html",
                                 owkey = dbase.getAPIKey('openWeather'),
-                                fckey = dbase.getAPIKey('fullContact'),
                                 gckey = dbase.getAPIKey('googleCivic'),
                                 lqkey = dbase.getAPIKey('locationiq'),
                                 mapskey = dbase.getAPIKey('googleMaps'))
