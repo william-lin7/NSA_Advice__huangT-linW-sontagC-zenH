@@ -78,7 +78,6 @@ def home(): #display home page of website
             "homepage.html",
             googleCivic = dbase.getAPIKey("googleCivic"),
             openWeather = dbase.getAPIKey("openWeather"),
-            fullContact = '',
             user = session['user'],
             name = userInfo['firstName'] + " " + userInfo['lastName'],
             loc = userInfo['location'],
@@ -245,7 +244,6 @@ def keys():
     if 'user' in session:
         return render_template("keys.html",
                                 owkey = dbase.getAPIKey('openWeather'),
-                                fckey = dbase.getAPIKey('fullContact'),
                                 gckey = dbase.getAPIKey('googleCivic'),
                                 lqkey = dbase.getAPIKey('locationiq'))
     else:
