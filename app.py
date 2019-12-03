@@ -242,12 +242,13 @@ def places():
 
 @app.route("/keys")
 def keys():
+    print(dbase.getAPIKey('googleMaps'))
     if 'user' in session:
         return render_template("keys.html",
                                 owkey = dbase.getAPIKey('openWeather'),
                                 gckey = dbase.getAPIKey('googleCivic'),
                                 lqkey = dbase.getAPIKey('locationiq'),
-                                mapskey = dbase.getAPIKey('googleMaps'))
+                                gmkey = dbase.getAPIKey('googleMaps'))
     else:
         return redirect(url_for("root"))
 
