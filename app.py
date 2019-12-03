@@ -136,10 +136,6 @@ def weather():
         flash("Location required. Please enter a city name.")
         return redirect(url_for("home"))
 
-@app.route("/civicInfo")
-def civicInfo():
-    return render_template("civicInfo.html")
-
 @app.route("/elections")
 def elections():
     key = dbase.getAPIKey('googleCivic')
