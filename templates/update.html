@@ -7,15 +7,22 @@
     <!-- Compressed CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
     <link rel="stylesheet" href="../static/stylesheets/app.css">
-    <title>Register</title>
+    <title>Update Your Information</title>
   </head>
   <body>
+    <nav class="hover-underline-menu" data-menu-underline-from-center>
+      <ul class="menu align-center">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/howToUse">How to Use</a></li>
+      </ul>
+    </nav>
     <!-- Registration Form -->
     <div class="login-box">
       <div class="row collapse expanded">
         <div class="small-12 medium-6 column small-order-2 medium-order-1">
           <div class="login-box-form-section">
-            <h4 class="login-box-title">Sign up</h4>
+            <h4 class="login-box-title">Update Your Information</h4>
             {% with messages = get_flashed_messages() %}
               {% if messages %}
                 <h5> {{ messages[0] }} </h5>

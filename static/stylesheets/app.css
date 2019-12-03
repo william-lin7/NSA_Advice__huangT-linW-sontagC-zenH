@@ -65,20 +65,24 @@
 .webName{
   color:#000000;
   font-weight: bold;
-<<<<<<< HEAD
-=======
 }
 
 .login-box {
-  width: 40vw;
-  margin-left: 30vw;
+  width: 50vw;
+  margin-left: 25vw;
+  padding: 2vw 5vw 2vw 5vw;
+  background-color: white;
+  border: 5px solid black;
+}
+
+.login-box-form-section form {
+  margin-bottom: 15px;
 }
 
 .login-box-submit-button {
   width: 100%;
   padding-top: 4px;
   padding-bottom: 4px;
->>>>>>> af6d72ebf621cb794097e81e84f6856d066ebde8
 }
 
 
@@ -122,6 +126,7 @@
 .home-top {
   margin: auto;
   text-align: center;
+  margin-top: 4vh;
 }
 
 
@@ -345,4 +350,15 @@
   text-align: center;
   padding-top: 8px;
   padding-bottom: 8px;
+}
+
+.home-text p {
+  text-align: left;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+body {
+  background-color: #5599DC;
+  height: 100vh;
 }
