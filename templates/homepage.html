@@ -45,7 +45,17 @@
           <a href="/weather" class="button">Check Weather</a><br>
           <a href="/elections" class="button">Check Elections</a><br>
           <a href="/representatives" class="button">Check Representatives</a><br>
-          <a href="/places" class="button">Cafes Near You</a>
+          <a href="/places" class="button">Cafes Near You</a><br>
+          <div class="dropdown">
+            <button class="dropbtn">Dropdown</button>
+            <div class="dropdown-content">
+              <form method='GET' action='/places'>
+                <input type="submit" name="cafe" value="cafe"/>
+              </form>
+              <a href="#">Link 2</a>
+              <a href="#">Link 3</a>
+            </div>
+          </div>
         </div>
       </div>
       <div class="cell small-4 large-4">
