@@ -79,7 +79,7 @@ def logout():
 @app.route("/home")
 def home(): #display home page of website
     if 'user' in session:
-        dbase.fillUserInfo(userInfo)
+        dbase.fillUserInfo(userInfo) #grabs user info
         return render_template(
             "homepage.html",
             googleCivic = dbase.getAPIKey("googleCivic"),
@@ -90,7 +90,7 @@ def home(): #display home page of website
             email = userInfo['email'],
             pnum = userInfo['phoneNum'],
             loc = userInfo['location'],
-            address = userInfo['address'])
+            address = userInfo['address'])#fills out page with all of a users info
     else:
         return redirect(url_for("root"))
 
@@ -102,7 +102,7 @@ def about():
 def howToUse():
     return render_template("howToUse.html")
 
-@app.route("/weather")
+@app.route("/weather") #renders a separate page with weather data for a user
 def weather():
     key = dbase.getAPIKey('openWeather')
     if key == "":
@@ -140,7 +140,7 @@ def weather():
         flash("Location required. Please enter a city name.")
         return redirect(url_for("home"))
 
-@app.route("/elections")
+@app.route("/elections") #renders separate page with election (local) data
 def elections():
     key = dbase.getAPIKey('googleCivic')
     #Address Format:
@@ -184,7 +184,7 @@ def elections():
         flash("Address required. Please enter an address")
         return redirect(url_for("home"))
 
-@app.route("/representatives")
+@app.route("/representatives") #separate page with political officials
 def representatives():
     key = dbase.getAPIKey('googleCivic')
     if key == "":
