@@ -39,29 +39,29 @@ def register():
 def update():
     return render_template("update.html")
 
-@app.route("/auth", methods = ["POST"]) # This route authenticates registration and log in
+@app.route("/auth", methods = ["POST"]) #This route authenticates registration and log in, and other updates
 def auth():
-    if request.form['submit_button'] == "Sign me up":
-        if dbase.addUser():
+    if request.form['submit_button'] == "Sign me up": #If you were sent here by registering
+        if dbase.addUser(): #@tyler when is user added to session? #adds user data to our db
             return redirect(url_for("root"))
         else:
-            return redirect(url_for("register"))
-    if request.form['submit_button'] == "Login":
+            return redirect(url_for("register")) #if addUser() returns false, it will also handle flashing the correct error message
+    if request.form['submit_button'] == "Login": #if sent here by lgging in
         if dbase.login():
             session['user'] = request.form['username'] #stores the user in the session
             f = open("keys.txt", "r") #opens file with the keys
-            keys = f.readlines()
+            keys = f.readlines() #following code accesses our google key without having it here in the code
             k = keys[0].split(":")
             #print(k)
             #print(k[1].strip())
             session['google_key'] = k[1].strip()
-            dbase.fillUserInfo(userInfo)
+            dbase.fillUserInfo(userInfo) #gives easy access to user information via userInfo variable
             return redirect(url_for("home"))
         else:
             return redirect(url_for("login"))
-    if request.form['submit_button'] == "Update Info":
+    if request.form['submit_button'] == "Update Info": #If updating info, fill in db
         dbase.update()
-        dbase.fillUserInfo(userInfo)
+        dbase.fillUserInfo(userInfo) #gives easy access to user information via userInfo variable
         return redirect(url_for("home"))
     if request.form['submit_button'] == "Update Key" or request.form['submit_button'] == "Add Key":
         dbase.updateAPIKey()
