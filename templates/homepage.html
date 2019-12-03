@@ -49,28 +49,42 @@
       </center>
       -->
       <div class="cell small-4 large-4">
-        <h5>Basic Information</h5>
-        Name: {{ name }} <br>
-        Email: {{ email }} <br>
-        Phone Number: {{ pnum }} <br>
-        Location: {{ loc }} <br>
-        Address: {{ address }} <br>
-        <a href="update"><h4>Update Info<h4></a>
+        <h3>Basic Information</h3>
+        <div class="home-text">
+          <p>Name: {{ name }} <br>
+          Email: {{ email }} <br>
+          Phone Number: {{ pnum }} <br>
+          Location: {{ loc }} <br>
+          Address: {{ address }} <br></p>
+        </div>
+        <a href="/update" class="button">Update Info</a><br>
+        <a href="/logout" class="button">Log Out</a>
       </div>
       <div class="cell small-4 large-4">
-        <h5>Information About You</h5>
+        <h3>Information About You</h3>
+        <div class="login-box-form-section">
+          <a href="/weather" class="button">Check Weather</a><br>
+          <a href="/elections" class="button">Check Elections</a><br>
+          <a href="/representatives" class="button">Check Representatives</a>
+        </div>
       </div>
       <div class="cell small-4 large-4">
-        <h5>Get Missing API Keys</h5>
-        <p>Follow the instructions below to get your missing keys, and click on the API Key Info button at the bottom of the page to add them to the site!</p>
-        {% if googleCivic == '' %}
-          <h5>Your Google API key is missing!</h5>
-          <p>Log into your Google account and go to "Credentials" at your <a href="https://console.developers.google.com/" target="_blank">Google Developer Console</a>, where you can start a new project to get a key!</p>
-        {% endif %}
-        {% if openWeather == '' %}
-          <h5>Your OpenWeather key is missing!</h5>
-          <p>Create an account at <a href="https://home.openweathermap.org/users/sign_up" target="_blank">OpenWeather</a>. Once you've signed in, go to API keys, where you should find a key already generated for you!</p>
-        {% endif %}
+        <h3>Add Your Missing API Keys</h3>
+        <a href="/keys" class="button">API Key Info</a><br>
+        <div class="home-text">
+          <p>Follow the instructions below to get your missing keys, and click on the API Key Info button above to add them to the site!</p>
+          {% if googleCivic == '' %}
+            <h5>Your Google API key is missing!</h5>
+            <p>Log into your Google account and go to "Credentials" at your <a href="https://console.developers.google.com/" target="_blank">Google Developer Console</a>, where you can start a new project to get a key!</p>
+          {% endif %}
+          {% if openWeather == '' %}
+            <h5>Your OpenWeather key is missing!</h5>
+            <p>Create an account at <a href="https://home.openweathermap.org/users/sign_up" target="_blank">OpenWeather</a>. Once you've signed in, go to API keys, where you should find a key already generated for you!</p>
+          {% endif %}
+          {% if fullContact == '' %}
+            <h5>Your Full Contact key is missing!</h5>
+          {% endif %}
+        </div>
       </div>
     </div>
 
@@ -78,6 +92,7 @@
       <div class="row collapse expanded">
         <div class="small-12 medium-6 column small-order-2 medium-order-1">
           <div class="login-box-form-section">
+            <!--
             <form action="/weather">
               <input class="login-box-submit-button" type="submit" name="submit_button" value="Check Weather">
             </form>
@@ -93,6 +108,7 @@
             <form action="/logout">
               <input class="login-box-submit-button" type="submit" name="submit_button" value="Logout">
             </form>
+            -->
           </div>
         </div>
       </div>
