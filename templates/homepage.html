@@ -62,9 +62,14 @@
       </div>
       <div class="cell small-4 large-4">
         <h5>Get Missing API Keys</h5>
-        {% if google_key == '' %}
-          <h6>Your Google API key is missing!</h6>
+        <p>Follow the instructions below to get your missing keys, and click on the API Key Info button at the bottom of the page to add them to the site!</p>
+        {% if googleCivic == '' %}
+          <h5>Your Google API key is missing!</h5>
           <p>Log into your Google account and go to "Credentials" at your <a href="https://console.developers.google.com/" target="_blank">Google Developer Console</a>, where you can start a new project to get a key!</p>
+        {% endif %}
+        {% if openWeather == '' %}
+          <h5>Your OpenWeather key is missing!</h5>
+          <p>Create an account at <a href="https://home.openweathermap.org/users/sign_up" target="_blank">OpenWeather</a>. Once you've signed in, go to API keys, where you should find a key already generated for you!</p>
         {% endif %}
       </div>
     </div>
