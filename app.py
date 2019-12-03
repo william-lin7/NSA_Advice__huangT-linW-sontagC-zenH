@@ -84,6 +84,7 @@ def home(): #display home page of website
             "homepage.html",
             googleCivic = dbase.getAPIKey("googleCivic"),
             openWeather = dbase.getAPIKey("openWeather"),
+            mapskey = dbase.getAPIKey('googleMaps'),
             fullContact = '',
             user = session['user'],
             name = userInfo['firstName'] + " " + userInfo['lastName'],
@@ -255,7 +256,8 @@ def keys():
                                 owkey = dbase.getAPIKey('openWeather'),
                                 fckey = dbase.getAPIKey('fullContact'),
                                 gckey = dbase.getAPIKey('googleCivic'),
-                                lqkey = dbase.getAPIKey('locationiq'))
+                                lqkey = dbase.getAPIKey('locationiq'),
+                                mapskey = dbase.getAPIKey('googleMaps'))
     else:
         return redirect(url_for("root"))
 

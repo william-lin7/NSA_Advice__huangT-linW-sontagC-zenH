@@ -68,6 +68,19 @@
             <form action="/home">
               <input class="login-box-submit-button" type="submit" name="submit_button" value="Home Page">
             </form>
+            <h5>Google Maps API Key: {{ mapskey }}</h5>
+            <form action="/auth" method="POST">
+              <input class="login-box-input" type="text" name="googleMaps" placeholder="Google Maps API key">
+              {% if lqkey == '' %}
+                <input class="login-box-submit-button" type="submit" name="submit_button" value="Add Key">
+              {% else %}
+                <input class="login-box-submit-button" type="submit" name="submit_button" value="Update Key">
+              {% endif %}
+            </form>
+            <br>
+            <form action="/home">
+              <input class="login-box-submit-button" type="submit" name="submit_button" value="Home Page">
+            </form>
           </div>
         </div>
       </div>

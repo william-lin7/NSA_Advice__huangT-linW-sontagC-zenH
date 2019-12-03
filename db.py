@@ -98,7 +98,7 @@ def updateAPIKey():
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
-    arr = ['openWeather','fullContact','googleCivic', 'locationIQ']
+    arr = ['openWeather','fullContact','googleCivic', 'locationIQ', 'googleMaps']
     idx = 0
     blank = True
     while idx < len(arr):

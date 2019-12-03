@@ -159,3 +159,4 @@ hilaryZ -- 2019-12-03 3:!5
 cobyS -- 2019-12-03 8:22
   - added numerous comments to app.py to describe routes
   - added a map to the homepage with hard coded coordinates (for now)
+  - added maps key everywhere
