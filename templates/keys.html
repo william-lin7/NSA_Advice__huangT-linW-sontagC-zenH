@@ -10,13 +10,6 @@
     <title>Register</title>
   </head>
   <body>
-    <nav class="hover-underline-menu" data-menu-underline-from-center>
-      <ul class="menu align-center">
-        <li><a href="/home">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/howToUse">How to Use</a></li>
-      </ul>
-    </nav>
     <!-- Registration Form -->
     <div class="login-box">
       <div class="row collapse expanded">
@@ -37,15 +30,6 @@
                 <input class="login-box-submit-button" type="submit" name="submit_button" value="Update Key">
               {% endif %}
             </form>
-            <h5>Full Contact API Key: {{ fckey }}</h5>
-            <form action="/auth" method="POST">
-              <input class="login-box-input" type="text" name="fullContact" placeholder="Full Contact API Key">
-              {% if fckey == '' %}
-                <input class="login-box-submit-button" type="submit" name="submit_button" value="Add Key">
-              {% else %}
-                <input class="login-box-submit-button" type="submit" name="submit_button" value="Update Key">
-              {% endif %}
-            </form>
             <h5>Google Civic API Key: {{ gckey }}</h5>
             <form action="/auth" method="POST">
               <input class="login-box-input" type="text" name="googleCivic" placeholder="Google Civic API key">
@@ -57,8 +41,17 @@
             </form>
             <h5>Location IQ API Key: {{ lqkey }}</h5>
             <form action="/auth" method="POST">
-              <input class="login-box-input" type="text" name="locationIQ" placeholder="Location IQ API key">
+              <input class="login-box-input" type="text" name="locationIQ" placeholder="Location IQ API Key">
               {% if lqkey == '' %}
+                <input class="login-box-submit-button" type="submit" name="submit_button" value="Add Key">
+              {% else %}
+                <input class="login-box-submit-button" type="submit" name="submit_button" value="Update Key">
+              {% endif %}
+            </form>
+            <h5>Google Maps API Key: {{ gmkey }}</h5>
+            <form action="/auth" method="POST">
+              <input class="login-box-input" type="text" name="googleMaps" placeholder="Google Maps API key">
+              {% if gmkey == '' %}
                 <input class="login-box-submit-button" type="submit" name="submit_button" value="Add Key">
               {% else %}
                 <input class="login-box-submit-button" type="submit" name="submit_button" value="Update Key">

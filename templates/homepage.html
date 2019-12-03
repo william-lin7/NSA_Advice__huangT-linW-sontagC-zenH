@@ -44,7 +44,8 @@
         <div class="login-box-form-section">
           <a href="/weather" class="button">Check Weather</a><br>
           <a href="/elections" class="button">Check Elections</a><br>
-          <a href="/representatives" class="button">Check Representatives</a>
+          <a href="/representatives" class="button">Check Representatives</a><br>
+          <a href="/places" class="button">Cafes Near You</a>
         </div>
       </div>
       <div class="cell small-4 large-4">
@@ -75,7 +76,8 @@ function initMap() {
     zoom: 13,
     //maxZoom: window.mapData.zoom,
     //minZoom: window.mapData.zoom,
-    center: new google.maps.LatLng(40.7178, -74.0139),
+    //lat: 40.7178 lon:-74.0139
+    center: new google.maps.LatLng({{lat}}, {{lon}}),
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
@@ -83,9 +85,9 @@ function initMap() {
   var contentString = '<div id="content">'+
   '<div id="siteNotice">'+
   '</div>'+
-  '<h1 id="firstHeading" class="firstHeading">IP Location</h1>'+
+  '<h1 id="firstHeading" class="firstHeading">Address</h1>'+
   '<div id="bodyContent">'+
-  '<p><b>IP Loation</b>, Our best guess to your location based on your IP address.' +
+  '<p><b>Address</b>, address received.' +
   '</div>'+
   '</div>';
   var infowindow = new google.maps.InfoWindow({
@@ -94,7 +96,7 @@ function initMap() {
 
   var marker = new google.maps.Marker({
     map: map,
-    position: new google.maps.LatLng(40.7178, -74.0139),
+    position: new google.maps.LatLng({{lat}}, {{lon}}),
     title: "Current Location"
   });
 
@@ -106,15 +108,18 @@ function initMap() {
     map.setCenter(myOptions.center);
   });
 }
-<!--AIzaSyCHK1ljchb34RGBly1lBogpqhhaulflFso-->
+
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4Rb84cl3x6kVw6AZuPrhQgP9teGyPN6A&amp;callback=initMap"></script>
-</html>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{mapkey}}&amp;callback=initMap"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7b81abe42e35fb81427728ee14de3c2b2e14845e
 </div>
 
 
