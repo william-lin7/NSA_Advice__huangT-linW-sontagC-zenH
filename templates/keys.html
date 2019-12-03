@@ -39,7 +39,15 @@
                 <input class="login-box-submit-button" type="submit" name="submit_button" value="Update Key">
               {% endif %}
             </form>
-            <br>
+            <h5>Location IQ API Key: {{ lqkey }}</h5>
+            <form action="/auth" method="POST">
+              <input class="login-box-input" type="text" name="locationIQ" placeholder="Location IQ API Key">
+              {% if lqkey == '' %}
+                <input class="login-box-submit-button" type="submit" name="submit_button" value="Add Key">
+              {% else %}
+                <input class="login-box-submit-button" type="submit" name="submit_button" value="Update Key">
+              {% endif %}
+            </form>
             <form action="/home">
               <input class="login-box-submit-button" type="submit" name="submit_button" value="Home Page">
             </form>
