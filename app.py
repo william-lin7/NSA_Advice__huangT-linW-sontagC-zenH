@@ -82,6 +82,7 @@ def home(): #display home page of website
             "homepage.html",
             googleCivic = dbase.getAPIKey("googleCivic"),
             openWeather = dbase.getAPIKey("openWeather"),
+            fullContact = '',
             user = session['user'],
             name = userInfo['firstName'] + " " + userInfo['lastName'],
             email = userInfo['email'],
