@@ -7,8 +7,8 @@
 from flask import Flask, render_template, request,  session, redirect, url_for, flash
 import sqlite3
 import urllib, json
-import api
-import db as dbase
+import api #helper functions found in api.py
+import db as dbase  #helper functions found in db.py
 app = Flask(__name__)
 app = Flask(__name__)
 app.secret_key = "adsfgt"
@@ -19,7 +19,7 @@ db = 0
 
 
 
-@app.route("/")
+@app.route("/") #Initally loaded page
 def root():
     if 'user' in session:
         return redirect(url_for("home"))
@@ -35,11 +35,11 @@ def login():
 def register():
     return render_template("register.html")
 
-@app.route("/update", methods = ["POST", "GET"])
+@app.route("/update", methods = ["POST", "GET"]) #The page accessed to update your own data
 def update():
     return render_template("update.html")
 
-@app.route("/auth", methods = ["POST"])
+@app.route("/auth", methods = ["POST"]) # This route authenticates registration and log in
 def auth():
     if request.form['submit_button'] == "Sign me up":
         if dbase.addUser():
