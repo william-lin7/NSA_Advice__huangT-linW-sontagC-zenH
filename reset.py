@@ -17,7 +17,7 @@ c.execute(command)
 command = "CREATE TABLE IF NOT EXISTS users (id INTEGER, username TEXT, password TEXT, firstName TEXT, lastName TEXT, email TEXT, phoneNum TEXT, location TEXT, ip TEXT, address TEXT);" # create table
 c.execute(command)    # run SQL statement
 
-command = "CREATE TABLE IF NOT EXISTS apiKeys (id INTEGER, openWeather TEXT, fullContact TEXT, googleCivic TEXT);" # create table
+command = "CREATE TABLE IF NOT EXISTS apiKeys (id INTEGER, openWeather TEXT, fullContact TEXT, googleCivic TEXT, locationIQ TEXT);" # create table
 c.execute(command)    # run SQL statement
 
 db.commit()
