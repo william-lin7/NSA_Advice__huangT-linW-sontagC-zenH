@@ -15,9 +15,6 @@ app.secret_key = "adsfgt"
 
 session = {}
 userInfo = {}
-db = 0
-
-
 
 @app.route("/") #Initally loaded page
 def root():
@@ -58,7 +55,7 @@ def auth():
         dbase.fillUserInfo(userInfo) #gives easy access to user information via userInfo variable
         return redirect(url_for("home"))
     if request.form['submit_button'] == "Update Key" or request.form['submit_button'] == "Add Key":
-        dbase.updateAPIKey()
+        dbase.updateAPIKey(request.form['submit_button'])
         return redirect(url_for("home"))
 
 @app.route("/logout")
@@ -101,11 +98,9 @@ def home(): #display home page of website
             "homepage.html",
             googleCivic = dbase.getAPIKey("googleCivic"),
             openWeather = dbase.getAPIKey("openWeather"),
-            fullContact = '',
-            user = session['user'],
+            mapskey = dbase.getAPIKey('googleMaps'),
+            user = userInfo['username'],
             name = userInfo['firstName'] + " " + userInfo['lastName'],
-            email = userInfo['email'],
-            pnum = userInfo['phoneNum'],
             loc = userInfo['location'],
             address = userInfo['address'],#fills out page with all of a users info
             lat = lat,
@@ -274,12 +269,13 @@ def places():
 
 @app.route("/keys")
 def keys():
+    print(dbase.getAPIKey('googleMaps'))
     if 'user' in session:
         return render_template("keys.html",
                                 owkey = dbase.getAPIKey('openWeather'),
-                                fckey = dbase.getAPIKey('fullContact'),
                                 gckey = dbase.getAPIKey('googleCivic'),
-                                lqkey = dbase.getAPIKey('locationiq'))
+                                lqkey = dbase.getAPIKey('locationiq'),
+                                gmkey = dbase.getAPIKey('googleMaps'))
     else:
         return redirect(url_for("root"))
 

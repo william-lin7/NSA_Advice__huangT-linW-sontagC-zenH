@@ -159,8 +159,17 @@ hilaryZ -- 2019-12-03 3:!5
 cobyS -- 2019-12-03 8:22
   - added numerous comments to app.py to describe routes
   - added a map to the homepage with hard coded coordinates (for now)
+<<<<<<< HEAD
 
 williamL -- 2019-12-02 15:02
   - got Location IQ and Google Place APIs to start working
   - created a page that shows you cafes near the address
   - fixed map to show current address
+=======
+  - added maps key everywhere
+
+tylerH -- 2019-12-03 08:50
+  - removed phoneNum and email from app
+  - removed fullcontact from app
+
+>>>>>>> c5b2a9c831f7c51b10f18b3d8007bf79d9599987

@@ -2,9 +2,6 @@ from flask import request
 import json, urllib
 from urllib.request import urlopen
 
-#API key for Full Contact
-#fQqUtVhwiJSAtMWCpe9zR8MTOTFxoTZ6
-
 #API key for google civic
 #AIzaSyBkXSJMObWSWQ7x8fpkGbksi-MQxbWvbj8
 
