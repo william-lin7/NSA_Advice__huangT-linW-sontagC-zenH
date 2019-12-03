@@ -26,7 +26,7 @@ APIs Used
 ```
 $ python3 -m venv [insert hero]                          #creates virtual environment
 $ . hero/bin/activate                                    #activates virtual environment
-(hero)$ pip install -r <path-to-file>requirements.txt    #installs all required packages
+(hero)$ pip install -r doc/requirements.txt              #installs all required packages
 (hero)$ deactivate                                       #deactivates the virtual environment (do after you finish testing)
 ```
 
@@ -40,3 +40,14 @@ git clone [insert HTTPS url of repo]
 python3 app.py
 ```
 3. Copy and paste the local url into your browser
+4. Reset everything
+```
+python3 reset.py
+```
+4. Register an account through the register button
+5. Log in with your new account
+6. Once you're logged in, follow the instructions on the website to create your API keys
+7. Click update info to enter a city in the 'location' section
+8. Enter an address in the 'address' section in the form
+      '[address number] [street] [city]'
+9. Now have fun! Explore our website and the random things we tell you based on your address.

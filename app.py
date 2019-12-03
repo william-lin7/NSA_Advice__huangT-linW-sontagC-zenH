@@ -232,7 +232,8 @@ def representatives():
 @app.route("/places")
 def places():
     key = dbase.getAPIKey('locationIQ')
-    key2 = dbase.getAPIKey('googleCivic')
+    #key2 = dbase.getAPIKey('googleCivic')
+    key2 = "AIzaSyA4Rb84cl3x6kVw6AZuPrhQgP9teGyPN6A"
     if key == "":
         flash("Error! Missing API Key")
         return redirect(url_for(root))
