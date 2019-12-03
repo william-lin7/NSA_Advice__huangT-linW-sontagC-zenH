@@ -1,5 +1,0 @@
-Google Civic Information API Key:
-
-Open Weather API Key:
-1. sign up for an account and you will receive an email for the API key
-da19d101a993403bd4ab9a3284ec0f0d
