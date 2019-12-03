@@ -33,8 +33,6 @@
         <h3>Basic Information</h3>
         <div class="home-text">
           <p>Name: {{ name }} <br>
-          Email: {{ email }} <br>
-          Phone Number: {{ pnum }} <br>
           Location: {{ loc }} <br>
           Address: {{ address }} <br></p>
         </div>
@@ -53,18 +51,12 @@
         <h3>Add Your Missing API Keys</h3>
         <a href="/keys" class="button">API Key Info</a><br>
         <div class="home-text">
-          <p>Follow the instructions below to get your missing keys, and click on the API Key Info button above to add them to the site!</p>
+          <p>Go to our How To Use page, and follow the instructions in the appropriate section to get your missing keys! Once you have them, click on the API Key Info button above to add them to your account.</p>
           {% if googleCivic == '' %}
             <h5>Your Google API key is missing!</h5>
-            <p>Log into your Google account and go to "Credentials" at your <a href="https://console.developers.google.com/" target="_blank">Google Developer Console</a>, where you can start a new project to get a key!</p>
           {% endif %}
           {% if openWeather == '' %}
             <h5>Your OpenWeather key is missing!</h5>
-            <p>Create an account at <a href="https://home.openweathermap.org/users/sign_up" target="_blank">OpenWeather</a>. Once you've signed in, go to API keys, where you should find a key already generated for you!</p>
-          {% endif %}
-          {% if fullContact == '' %}
-            <h5>Your Full Contact key is missing!</h5>
-            <p>Add instructions later</p>
           {% endif %}
         </div>
       </div>
@@ -122,37 +114,6 @@ function initMap() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-
-    <div class="login-box">
-      <div class="row collapse expanded">
-        <div class="small-12 medium-6 column small-order-2 medium-order-1">
-          <div class="login-box-form-section">
-            <!--
-            <form action="/weather">
-              <input class="login-box-submit-button" type="submit" name="submit_button" value="Check Weather">
-            </form>
-            <form action="/elections">
-              <input class="login-box-submit-button" type="submit" name="submit_button" value="Elections">
-            </form>
-            <form action="/representatives">
-              <input class="login-box-submit-button" type="submit" name="submit_button" value="Representatives">
-            </form>
-            <form action="/places">
-              <input class="login-box-submit-button" type="submit" name="submit_button" value="Places Near You">
-            </form>
-            <form action="/keys">
-              <input class="login-box-submit-button" type="submit" name="submit_button" value="API Key Info">
-            </form>
-            <form action="/logout">
-              <input class="login-box-submit-button" type="submit" name="submit_button" value="Logout">
-            </form>
-            -->
-          </div>
-        </div>
-      </div>
-    </div>
-    <br>
-    <br>
 
 </div>
 
