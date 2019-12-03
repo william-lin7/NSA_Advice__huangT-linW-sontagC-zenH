@@ -82,7 +82,8 @@ def home(): #display home page of website
             name = userInfo['firstName'] + " " + userInfo['lastName'],
             email = userInfo['email'],
             pnum = userInfo['phoneNum'],
-            loc = userInfo['location'])
+            loc = userInfo['location'],
+            address = userInfo['address'])
     else:
         return redirect(url_for("root"))
 
@@ -96,6 +97,7 @@ def howToUse():
 
 @app.route("/weather")
 def weather():
+    key = dbase.getAPIKey('weatherAPI')
     url = "http://api.openweathermap.org/data/2.5/weather?q={}&APPID=da19d101a993403bd4ab9a3284ec0f0d"
     if userInfo['location'] != "":
         loc = userInfo['location']

@@ -132,3 +132,12 @@ cobyS -- 2019-11-27 9:07
 
 williamL -- 2019-11-27 17:32
   - formatted info from openweather api to display weather nicely
+
+tylerH -- 2019-12-02 8:50
+  - worked on adding getting api key function
+  - added new table to store api keys
+
+tylerH -- 2019-12-02 18:50
+  - added an address field to update form and table of users
+  - added field to add api keys
+  - added a way to show address

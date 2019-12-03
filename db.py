@@ -20,7 +20,7 @@ def addUser():
                 return False
             else:
                 id = getTableLen("users") #gives the user the next availabe id
-                c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), "", "")) #different version of format
+                c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], request.form['email'], str(request.form['phoneNum']), "", "", "")) #different version of format
                 db.commit()
                 db.close()
                 flash("Register Success!")
@@ -54,22 +54,14 @@ def update():
     db = sqlite3.connect(dbfile)
     c = db.cursor()
     blank = True
-    arr = ['firstName','lastName','username','password','email','phoneNum','location']
+    arr = ['firstName','lastName','username','password','email','phoneNum','location', 'address']
     idx = 0
     while idx < len(arr):
-        if arr[idx] == 'username' or arr[idx] == 'password':
-            if request.form[arr[idx]] != "":
-                command = "UPDATE users SET \"{}\" = \"{}\" WHERE id = {};"
-                c.execute(command.format(arr[idx],request.form[arr[idx]],userID))
-                session['user'] = request.form['username']
-                blank = False
-                db.commit()
-        else:
-            if request.form[arr[idx]] != "":
-                command = "UPDATE info SET \"{}\" = \"{}\" WHERE id = {};"
-                c.execute(command.format(arr[idx],request.form[arr[idx]],userID))
-                blank = False
-                db.commit()
+        if request.form[arr[idx]] != "":
+            command = "UPDATE users SET \"{}\" = \"{}\" WHERE id = {};"
+            c.execute(command.format(arr[idx],request.form[arr[idx]],userID))
+            blank = False
+            db.commit()
         idx += 1
     if not blank:
         flash("Update Success!")
@@ -91,10 +83,22 @@ def fillUserInfo(arr):
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
-    q = c.execute("SELECT * FROM info WHERE id = {};".format(userID))
+    q = c.execute("SELECT * FROM users WHERE id = {};".format(userID))
     for bar in q:
-        arr['firstName'] = bar[1]
-        arr['lastName'] = bar[2]
-        arr['email'] = bar[3]
-        arr['phoneNum'] = bar[4]
-        arr['location'] = bar[5]
+        print(bar)
+        arr['firstName'] = bar[3]
+        arr['lastName'] = bar[4]
+        arr['email'] = bar[5]
+        arr['phoneNum'] = bar[6]
+        arr['location'] = bar[7]
+        arr['address'] = bar[9]
+
+def getAPIKey(api):
+    key = ""
+    dbfile = "data.db"
+    db = sqlite3.connect(dbfile)
+    c = db.cursor()
+    q = c.execute("SELECT \"{}\" FROM users WHERE id = {};".format(api,userID))
+    for bar in q:
+        key = bar[0]
+    return key

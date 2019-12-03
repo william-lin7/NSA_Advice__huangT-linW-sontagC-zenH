@@ -54,6 +54,7 @@
         Email: {{ email }} <br>
         Phone Number: {{ pnum }} <br>
         Location: {{ loc }} <br>
+        Address: {{ address }} <br> 
         <a href="update"><h4>Update Info<h4></a>
       </div>
       <div class="cell small-4 large-4">
@@ -78,6 +79,18 @@
             <input class="login-box-submit-button" type="submit" name="submit_button" value="Civic Info">
           </form>
           <div class="login-box-form-section">
+            <h4 class="login-box-title"><center>Enter API Keys</center></h4>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <h5> {{ messages[0] }} </h5>
+              {% endif %}
+            {% endwith %}
+            <form action="/auth" method="POST">
+              <input class="login-box-input" type="text" name="openWeather" placeholder="Open Weather API Key">
+              <input class="login-box-input" type="text" name="fullContact" placeholder="Full Contact API Key">
+              <input class="login-box-input" type="text" name="googleCivic" placeholder="Google Civic API key">
+              <input class="login-box-submit-button" type="submit" name="submit_button" value="Insert Keys">
+            </form>
             <form action="/logout">
               <input class="login-box-submit-button" type="submit" name="submit_button" value="Logout">
             </form>
