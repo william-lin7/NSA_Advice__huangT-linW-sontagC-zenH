@@ -22,7 +22,7 @@ def addUser():
                 id = getTableLen("users") #gives the user the next availabe id
                 c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], "", "")) #different version of format
                 db.commit()
-                c.execute("INSERT INTO apiKeys VALUES(?, ?, ?, ?);", (id, "", "", ""))
+                c.execute("INSERT INTO apiKeys VALUES(?, ?, ?, ?, ?);", (id, "", "", "", ""))
                 db.commit()
                 db.close()
                 flash("Register Success!")
@@ -97,7 +97,6 @@ def updateAPIKey():
     db = sqlite3.connect(dbfile)
     c = db.cursor()
     arr = ['openWeather', 'googleCivic', 'locationIQ', 'googleMaps']
-    arr = ['openWeather', 'googleCivic', 'locationIQ']
     idx = 0
     blank = True
     while idx < len(arr):
