@@ -10,8 +10,9 @@
     <title>Civic Info</title>
   </head>
   <body>
-    Representatives in your area: <br><br>
+    <div><h3>Representatives in your area: </h3></div><br>
     {% for person in reps %}
+    <div>
       Name: {{person["name"]}}<br>
       Address: {%for i in person["address"]%}
                   {{i["line1"]}}, {{i["city"]}}, {{i["state"]}}, {{i["zip"]}}<br>
@@ -31,6 +32,7 @@
         <a href = {{person["photoUrl"]}}> Picture </a> <br>
       {%endif%}
       <br>
+    </div>
     {%endfor%}
   </body>
 </html>

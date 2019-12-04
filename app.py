@@ -75,7 +75,7 @@ def home(): #display home page of website
         url = "https://us1.locationiq.com/v1/search.php?key={}&q={}&format=json"
         lat = 0
         lon = 0
-        plc = ['atm','bakery','bank','bus_station','cafe','church','clothing_store','gym','hospital','laundry','library','school','supermarket','train_station','park']
+        plc = ['atm','bakery','bank','bus_station','cafe','church','clothing_store','gym','hospital','laundry','library','school','subway_station','supermarket','park']
         if userInfo['address'] != "":
             addr = userInfo['address']
             if ' ' in addr:
@@ -88,9 +88,9 @@ def home(): #display home page of website
                 lon = data[0]["lon"]
             except urllib.error.HTTPError as e:
                 if e.code == 404:
-                    flash("Error! Invalid Address. Map unavailable.")
+                    flash("Error! Invalid Address. Map unavailable")
                 elif e.code == 401:
-                    flash("Error! Invalid API Key. Map unavailable.")
+                    flash("Error! Invalid API Key. Map unavailable")
                 else:
                     flash("Error! Map unavailable.")
         else:
@@ -99,7 +99,7 @@ def home(): #display home page of website
             "homepage.html",
             googleCivic = dbase.getAPIKey("googleCivic"),
             openWeather = dbase.getAPIKey("openWeather"),
-            mapskey = dbase.getAPIKey('googleMaps'),
+            mapkey = dbase.getAPIKey('googleMaps'),
             user = userInfo['username'],
             name = userInfo['firstName'] + " " + userInfo['lastName'],
             loc = userInfo['location'],
@@ -239,7 +239,7 @@ def places(plc):
     key2 = "AIzaSyA4Rb84cl3x6kVw6AZuPrhQgP9teGyPN6A"
     if key == "":
         flash("Error! Missing API Key")
-        return redirect(url_for(root))
+        return redirect(url_for("root"))
     url = "https://us1.locationiq.com/v1/search.php?key={}&q={}&format=json"
     url2 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={}&radius={}&type={}&key={}"
     if userInfo['address'] != "":
@@ -273,7 +273,6 @@ def places(plc):
 
 @app.route("/keys")
 def keys():
-    print(dbase.getAPIKey('googleMaps'))
     if 'user' in session:
         return render_template("keys.html",
                                 owkey = dbase.getAPIKey('openWeather'),

@@ -45,12 +45,11 @@
           <a href="/weather" class="button">Check Weather</a><br>
           <a href="/elections" class="button">Check Elections</a><br>
           <a href="/representatives" class="button">Check Representatives</a><br>
-          <a href="/places" class="button">Cafes Near You</a><br>
           <div class="dropdown">
-          <button class="dropbtn">Dropdown</button>
+          <button class="dropbtn">Places Near You</button>
             <div class="dropdown-content">
               {% for p in places %}
-                  <a href="/places/{{ p }}">{{ p }}</a>
+                <a href="/places/{{ p }}">{{ p }}</a>
               {% endfor %}
             </div>
           </div>
@@ -62,11 +61,14 @@
         <a href="/keys" class="button">API Key Info</a><br>
         <div class="home-text">
           <p>Follow the instructions in How to Use to get your missing keys, and click on the API Key Info button above to add them to the site!</p>
+          {% if openWeather == '' %}
+            <h5>Your Open Weather key is missing!</h5>
+          {% endif %}
           {% if googleCivic == '' %}
             <h5>Your Google Civic API key is missing!</h5>
           {% endif %}
-          {% if openWeather == '' %}
-            <h5>Your OpenWeather key is missing!</h5>
+          {% if lqkey == '' %}
+            <h5>Your Location IQ API key is missing!</h5>
           {% endif %}
           {% if mapskey == '' %}
             <h5>Your Google Maps API key is missing!</h5>

@@ -17,6 +17,7 @@
         <li><a href="/howToUse">How to Use</a></li>
       </ul>
     </nav>
+<<<<<<< HEAD
     <div class="weather-body middle-content-section align-middle">
       <div class="home-grid grid-x align-middle">
         <div class="cell small-6 large-6">
@@ -66,6 +67,43 @@
             <h3>Humidity</h3>
             <h5>{{humidity}}%</h5>
           </div>
+=======
+    <div class="middle-content-section">
+      <center>
+        {% if weather == "Rain" %}
+          <img class = "weather" src = "../static/images/rain.gif" alt = "rain gif"/>
+        {% endif %}
+        {% if weather == "Clouds" %}
+          <img class = "weather" src = "../static/images/clouds.gif" alt = "clouds gif"/>
+        {% endif %}
+        {% if weather == "Clear" %}
+          <img class = "weather" src = "../static/images/clear.gif" alt = "clear gif"/>
+        {% endif %}
+        {% if weather == "Thunderstorm" %}
+          <img class = "weather" src = "../static/images/thunderstorm.gif" alt = "thunderstorm gif"/>
+        {% endif %}
+        {% if weather == "Drizzle" %}
+          <img class = "weather" src = "../static/images/drizzle.gif" alt = "drizzle gif"/>
+        {% endif %}
+        {% if weather == "Snow" %}
+          <img class = "weather" src = "../static/images/snow.gif" alt = "snow gif"/>
+        {% endif %}
+        <br>
+        Weather: {{description}} <br>
+        Temperature: {{temp}} ˚F <br>
+        Wind: {{wind}} m/s <br>
+        Pressure: {{pressure}} hpa <br>
+        Humidity: {{humidity}}% <br>
+      </center>
+    </div>
+    <div class="login-box">
+      <div class="row collapse expanded">
+        <div class="small-12 medium-6 column small-order-2 medium-order-1">
+          <div class="login-box-form-section">
+            <form action="/home">
+              <input class="login-box-submit-button" type="submit" name="submit_button" value="Home Page">
+            </form>
+>>>>>>> 4f495675883724ca87ab9ec3a6cb3420d0db477d
           </div>
             <!--
             <p>Weather: {{description}} <br>
