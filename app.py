@@ -75,7 +75,7 @@ def home(): #display home page of website
         url = "https://us1.locationiq.com/v1/search.php?key={}&q={}&format=json"
         lat = 0
         lon = 0
-        plc = ['cafe','park']
+        plc = ['atm','bakery','bank','bus_station','cafe','church','clothing_store','gym','hospital','laundry','library','school','supermarket','train_station','park']
         if userInfo['address'] != "":
             addr = userInfo['address']
             if ' ' in addr:
@@ -231,12 +231,9 @@ def representatives():
         flash("Address required. Please enter an address")
         return redirect(url_for("home"))
 
-def searchType():
-    return request.form["cafe"]
 
 @app.route("/places/<plc>")
 def places(plc):
-    print(plc)
     key = dbase.getAPIKey('locationIQ')
     #key2 = dbase.getAPIKey('googleCivic')
     key2 = "AIzaSyA4Rb84cl3x6kVw6AZuPrhQgP9teGyPN6A"
@@ -245,8 +242,6 @@ def places(plc):
         return redirect(url_for(root))
     url = "https://us1.locationiq.com/v1/search.php?key={}&q={}&format=json"
     url2 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={}&radius={}&type={}&key={}"
-    type = searchType()
-    print(type)
     if userInfo['address'] != "":
         addr = userInfo['address']
         if ' ' in addr:
@@ -257,7 +252,7 @@ def places(plc):
             data = json.loads(response)
             lat = data[0]["lat"]
             lon = data[0]["lon"]
-            u2 = urllib.request.urlopen(url2.format(lat + ',' + lon, 1500, type, key2))
+            u2 = urllib.request.urlopen(url2.format(lat + ',' + lon, 1500, plc, key2))
             response2 = u2.read()
             data2 = json.loads(response2)
             return render_template("places.html",

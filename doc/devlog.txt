@@ -172,3 +172,7 @@ tylerH -- 2019-12-03 08:50
 
 tylerH -- 2019-12-03 19:00
   - worked on drop down menu so values could be sent to flask app
+
+williamL -- 2019-12-03 19:30
+  - created dropdown menu for places nearby
+  - updated the 'About' and 'How To Use' pages

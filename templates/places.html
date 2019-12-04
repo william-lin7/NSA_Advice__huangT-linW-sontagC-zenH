@@ -13,9 +13,7 @@
     {% for element in info %}
       Name: {{element["name"]}}<br>
       Address: {{element["vicinity"]}}<br>
-      Rating: {{element["rating"]}}<br>
-      {% set link = element["photos"][0]["html_attributions"][0].split('"') %}
-      <a href = {{link[1]}}> Photos </a><br><br>
+      Rating: {{element["rating"]}}<br><br>
     {% endfor %}
   </body>
 </html>
