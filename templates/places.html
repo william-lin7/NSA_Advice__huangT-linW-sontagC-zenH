@@ -10,12 +10,25 @@
     <title>Civic Info</title>
   </head>
   <body>
-    {% for element in info %}
-    <div>
-      Name: {{element["name"]}}<br>
-      Address: {{element["vicinity"]}}<br>
-      Rating: {{element["rating"]}}<br><br>
+    <nav class="hover-underline-menu" data-menu-underline-from-center>
+      <ul class="menu align-center">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/howToUse">How to Use</a></li>
+      </ul>
+    </nav>
+
+    <div class="text-center">
+      <h1>Locations</h1>
     </div>
-    {% endfor %}
+    <div class="grid-x">
+      {% for element in info %}
+      <div class="text-center cell small-3">
+        Name: {{element["name"]}}<br>
+        Address: {{element["vicinity"]}}<br>
+        Rating: {{element["rating"]}}<br><br>
+      </div>
+      {% endfor %}
+    </div>
   </body>
 </html>
