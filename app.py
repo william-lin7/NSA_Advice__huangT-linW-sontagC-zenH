@@ -75,6 +75,7 @@ def home(): #display home page of website
         url = "https://us1.locationiq.com/v1/search.php?key={}&q={}&format=json"
         lat = 0
         lon = 0
+        plc = ['cafe','park']
         if userInfo['address'] != "":
             addr = userInfo['address']
             if ' ' in addr:
@@ -104,7 +105,8 @@ def home(): #display home page of website
             loc = userInfo['location'],
             address = userInfo['address'],#fills out page with all of a users info
             lat = lat,
-            lon = lon)
+            lon = lon,
+            places = plc)
     else:
         return redirect(url_for("root"))
 
@@ -232,8 +234,9 @@ def representatives():
 def searchType():
     return request.form["cafe"]
 
-@app.route("/places")
-def places():
+@app.route("/places/<plc>")
+def places(plc):
+    print(plc)
     key = dbase.getAPIKey('locationIQ')
     #key2 = dbase.getAPIKey('googleCivic')
     key2 = "AIzaSyA4Rb84cl3x6kVw6AZuPrhQgP9teGyPN6A"
