@@ -408,3 +408,11 @@ body {
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 }
+
+.weather-body {
+  margin-top: 20vh;
+}
+
+.text-center p {
+  vertical-align: middle;
+}
