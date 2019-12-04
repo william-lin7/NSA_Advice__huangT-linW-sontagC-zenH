@@ -3,7 +3,7 @@ import sqlite3 # enable control of an sqlite database
 
 userID = -1
 
-def addUser():
+def addUser(): #adds user to database
     if request.form['password'] != request.form['password2']:
         flash("Error! Passwords do not match")
         return False
@@ -21,14 +21,14 @@ def addUser():
                 id = getTableLen("users") #gives the user the next availabe id
                 c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], "", "")) #different version of format
                 db.commit()
-                c.execute("INSERT INTO apiKeys VALUES(?, ?, ?, ?, ?);", (id, "", "", "", ""))
+                c.execute("INSERT INTO apiKeys VALUES(?, ?, ?, ?);", (id, "", "", ""))
                 db.commit()
                 db.close()
                 flash("Register Success!")
-                flash("index") #Why flash index?
+                flash("index")
                 return True
 
-def login():
+def login(): #compares login credentials, then logs in if they are correct
     global userID
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
@@ -47,10 +47,10 @@ def login():
                 flash("Error! Incorrect password")
                 return False
     else:
-        flash("Error! Incorrect username")
+        flash("Error! Username does not exist")
         return False
 
-def update():
+def update(): #updates a user's info based on the info provided
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
@@ -80,7 +80,7 @@ def getTableLen(tbl): #returns the length of a table
     for line in q:
         return line[0]
 
-def fillUserInfo(arr):
+def fillUserInfo(arr): #@param arr is an array and fills this array with info on the current user
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
@@ -92,11 +92,11 @@ def fillUserInfo(arr):
         arr['location'] = bar[5]
         arr['address'] = bar[6]
 
-def updateAPIKey(button):
+def updateAPIKey(button): #@param button determines which API to get updated
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
-    arr = ['openWeather', 'googleCivic', 'locationIQ', 'googleMaps']
+    arr = ['openWeather', 'googleCloud', 'locationIQ']
     idx = 0
     blank = True
     while idx < len(arr):
@@ -116,7 +116,7 @@ def updateAPIKey(button):
     db.commit()
     db.close()
 
-def getAPIKey(api):
+def getAPIKey(api): #@param api is which api key to retrieve from the database
     key = ''
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)

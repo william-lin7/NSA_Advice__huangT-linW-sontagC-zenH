@@ -37,9 +37,9 @@
                 <input class="login-box-submit-button" type="submit" name="submit_button" value="Update Key">
               {% endif %}
             </form>
-            <h5>Google Civic API Key: {{ gckey }}</h5>
+            <h5>Google Cloud API Key: {{ gckey }}</h5>
             <form action="/auth" method="POST">
-              <input class="login-box-input" type="text" name="googleCivic" placeholder="Google Civic API key">
+              <input class="login-box-input" type="text" name="googleCloud" placeholder="Google Cloud API key">
               {% if gckey == '' %}
                 <input class="login-box-submit-button" type="submit" name="submit_button" value="Add Key">
               {% else %}
@@ -50,15 +50,6 @@
             <form action="/auth" method="POST">
               <input class="login-box-input" type="text" name="locationIQ" placeholder="Location IQ API Key">
               {% if lqkey == '' %}
-                <input class="login-box-submit-button" type="submit" name="submit_button" value="Add Key">
-              {% else %}
-                <input class="login-box-submit-button" type="submit" name="submit_button" value="Update Key">
-              {% endif %}
-            </form>
-            <h5>Google Maps API Key: {{ gmkey }}</h5>
-            <form action="/auth" method="POST">
-              <input class="login-box-input" type="text" name="googleMaps" placeholder="Google Maps API key">
-              {% if gmkey == '' %}
                 <input class="login-box-submit-button" type="submit" name="submit_button" value="Add Key">
               {% else %}
                 <input class="login-box-submit-button" type="submit" name="submit_button" value="Update Key">
