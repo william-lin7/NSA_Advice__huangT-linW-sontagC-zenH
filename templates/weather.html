@@ -17,46 +17,65 @@
         <li><a href="/howToUse">How to Use</a></li>
       </ul>
     </nav>
-    <div class="middle-content-section">
-      <center>
-        {% if weather == "Rain" %}
-          <img class = "weather" src = "../static/images/rain.gif" alt = "rain gif"/>
-        {% endif %}
-        {% if weather == "Clouds" %}
-          <img class = "weather" src = "../static/images/clouds.gif" alt = "clouds gif"/>
-        {% endif %}
-        {% if weather == "Clear" %}
-          <img class = "weather" src = "../static/images/clear.gif" alt = "clear gif"/>
-        {% endif %}
-        {% if weather == "Thunderstorm" %}
-          <img class = "weather" src = "../static/images/thunderstorm.gif" alt = "thunderstorm gif"/>
-        {% endif %}
-        {% if weather == "Drizzle" %}
-          <img class = "weather" src = "../static/images/drizzle.gif" alt = "drizzle gif"/>
-        {% endif %}
-        {% if weather == "Snow" %}
-          <img class = "weather" src = "../static/images/snow.gif" alt = "snow gif"/>
-        {% endif %}
-        <br>
-        Weather: {{description}} <br>
-        Temperature: {{temp}} ˚F <br>
-        Wind: {{wind}} m/s <br>
-        Pressure: {{pressure}} hpa <br>
-        Humidity: {{humidity}}% <br>
-      </center>
-    </div>
-    <!--
-    <div class="login-box">
-      <div class="row collapse expanded">
-        <div class="small-12 medium-6 column small-order-2 medium-order-1">
-          <div class="login-box-form-section">
-            <form action="/home">
-              <input class="login-box-submit-button" type="submit" name="submit_button" value="Home Page">
-            </form>
+    <div class="weather-body middle-content-section align-middle">
+      <div class="home-grid grid-x align-middle">
+        <div class="cell small-6 large-6">
+          <center>
+            {% if weather == "Rain" %}
+              <img class = "weather" src = "../static/images/rain.gif" alt = "rain gif"/>
+            {% endif %}
+            {% if weather == "Clouds" %}
+              <img class = "weather" src = "../static/images/clouds.gif" alt = "clouds gif"/>
+            {% endif %}
+            {% if weather == "Clear" %}
+              <img class = "weather" src = "../static/images/clear.gif" alt = "clear gif"/>
+            {% endif %}
+            {% if weather == "Thunderstorm" %}
+              <img class = "weather" src = "../static/images/thunderstorm.gif" alt = "thunderstorm gif"/>
+            {% endif %}
+            {% if weather == "Drizzle" %}
+              <img class = "weather" src = "../static/images/drizzle.gif" alt = "drizzle gif"/>
+            {% endif %}
+            {% if weather == "Snow" %}
+              <img class = "weather" src = "../static/images/snow.gif" alt = "snow gif"/>
+            {% endif %}
+          </center>
+        </div>
+        <div class="cell small-6 large-6">
+          <div class="grid-x">
+          <div class="text-center cell small-4">
+            <h3>Weather</h3>
+            <h5>{{description}}</h5>
           </div>
+          <div class="text-center cell small-4">
+            <h3>Temperature</h3>
+            <h5>{{temp}} ˚F</h5>
+          </div>
+          <div class="text-center cell small-4">
+            <h3>Wind</h3>
+            <h5>{{wind}} m/s</h5>
+          </div>
+          </div>
+
+          <div class="grid-x">
+          <div class="text-center cell small-6">
+            <h3>Pressure</h3>
+            <h5>{{pressure}} hpa</h5>
+          </div>
+          <div class="text-center cell small-6">
+            <h3>Humidity</h3>
+            <h5>{{humidity}}%</h5>
+          </div>
+          </div>
+            <!--
+            <p>Weather: {{description}} <br>
+            Temperature: {{temp}} ˚F <br>
+            Wind: {{wind}} m/s <br>
+            Pressure: {{pressure}} hpa <br>
+            Humidity: {{humidity}}% </p>
+          -->
         </div>
       </div>
     </div>
-  -->
   </body>
 </html>
