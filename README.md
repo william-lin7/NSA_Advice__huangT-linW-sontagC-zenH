@@ -7,15 +7,18 @@ ROSTER
 - Hilary Zen: Front end
 
 WEBSITE
-- An interface where users can enter their information to receive information
-about themselves including but not limited to: social media, weather, contact
-information, and much more.
+- An interface where users can enter their address to receive information
+  regarding their surroundings.
 
 APIs Used
-- Full Contact: https://docs.google.com/document/d/1EPvnSGKtxZT3qKZXAlt76yuSJ2vSZ6OWJmi29YdHiNs/edit
-    - returns a person or company's name, age, social media, etc.. when given minimal information
 - Google Civic Information: https://docs.google.com/document/d/1AYUhQ15IkV8yX_zLNDS0x9Q0l_QY6vOv3aA3f_LHDzU/edit
     - provides civic information based on residential address
+- Google Places: https://docs.google.com/document/d/1zLgw_m5zhouRFc_Vm21_RTpCQwBbu_Cr2zOJH9VGL3o/edit
+    - takes in location as latitude and longitude and returns places nearby
+- Maps Embed: https://docs.google.com/document/d/1BrK8KIi1jxdETaGoEcuEB_UDiGwZhFFeWxZ_dlwiFww/edit
+    - takes in location as latitude and longitude and returns a google map of it
+- Location IQ: https://docs.google.com/document/d/1i6Zl1cfnEr_u9oqvk1XbwJWGMqf8Vp2IdQzUf2InGek/edit
+    - returns the latitude and longitude of an address
 - OpenWeatherMap: https://docs.google.com/document/d/1V-IRbvKGQpJMTfYxsOcew8A-9y9otnKWGP7eXR2bJ6Y/edit
     - provides weather data given geographic location
 
