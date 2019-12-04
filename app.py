@@ -75,7 +75,7 @@ def home(): #display home page of website
         url = "https://us1.locationiq.com/v1/search.php?key={}&q={}&format=json"
         lat = 0
         lon = 0
-        plc = ['atm','bakery','bank','bus_station','cafe','church','clothing_store','gym','hospital','laundry','library','school','supermarket','train_station','park']
+        plc = ['atm','bakery','bank','bus_station','cafe','church','clothing_store','gym','hospital','laundry','library','school','subway_station','supermarket','park']
         if userInfo['address'] != "":
             addr = userInfo['address']
             if ' ' in addr:

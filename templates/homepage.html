@@ -45,9 +45,8 @@
           <a href="/weather" class="button">Check Weather</a><br>
           <a href="/elections" class="button">Check Elections</a><br>
           <a href="/representatives" class="button">Check Representatives</a><br>
-          <a href="/places" class="button">Cafes Near You</a><br>
           <div class="dropdown">
-          <button class="dropbtn">Dropdown</button>
+          <button class="dropbtn">Places Near You</button>
             <div class="dropdown-content">
               {% for p in places %}
                 <a href="/places/{{ p }}">{{ p }}</a>
