@@ -239,7 +239,7 @@ def places(plc):
     key2 = "AIzaSyA4Rb84cl3x6kVw6AZuPrhQgP9teGyPN6A"
     if key == "":
         flash("Error! Missing API Key")
-        return redirect(url_for(root))
+        return redirect(url_for("root"))
     url = "https://us1.locationiq.com/v1/search.php?key={}&q={}&format=json"
     url2 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={}&radius={}&type={}&key={}"
     if userInfo['address'] != "":
