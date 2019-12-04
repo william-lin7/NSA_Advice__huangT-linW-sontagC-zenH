@@ -47,13 +47,11 @@
           <a href="/representatives" class="button">Check Representatives</a><br>
           <a href="/places" class="button">Cafes Near You</a><br>
           <div class="dropdown">
-            <button class="dropbtn">Dropdown</button>
+          <button class="dropbtn">Dropdown</button>
             <div class="dropdown-content">
-              <form method='GET' action='/places'>
-                <input type="submit" name="cafe" value="cafe"/>
-              </form>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
+              {% for p in places %}
+                  <a href="/places/{{ p }}">{{ p }}</a>
+              {% endfor %}
             </div>
           </div>
         </div>
