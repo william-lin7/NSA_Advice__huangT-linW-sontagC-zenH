@@ -88,9 +88,9 @@ def home(): #display home page of website
                 lon = data[0]["lon"]
             except urllib.error.HTTPError as e:
                 if e.code == 404:
-                    flash("Error! Invalid Address. Map unavailable.")
+                    flash("Error! Invalid Address. Map unavailable")
                 elif e.code == 401:
-                    flash("Error! Invalid API Key. Map unavailable.")
+                    flash("Error! Invalid API Key. Map unavailable")
                 else:
                     flash("Error! Map unavailable.")
         else:
@@ -99,7 +99,7 @@ def home(): #display home page of website
             "homepage.html",
             googleCivic = dbase.getAPIKey("googleCivic"),
             openWeather = dbase.getAPIKey("openWeather"),
-            mapskey = dbase.getAPIKey('googleMaps'),
+            mapkey = dbase.getAPIKey('googleMaps'),
             user = userInfo['username'],
             name = userInfo['firstName'] + " " + userInfo['lastName'],
             loc = userInfo['location'],
@@ -273,7 +273,6 @@ def places(plc):
 
 @app.route("/keys")
 def keys():
-    print(dbase.getAPIKey('googleMaps'))
     if 'user' in session:
         return render_template("keys.html",
                                 owkey = dbase.getAPIKey('openWeather'),
