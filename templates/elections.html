@@ -10,40 +10,50 @@
     <title>Civic Info</title>
   </head>
   <body>
-    <div><h3>Elections Near You:</h3><br>
+    <nav class="hover-underline-menu" data-menu-underline-from-center>
+      <ul class="menu align-center">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/howToUse">How to Use</a></li>
+      </ul>
+    </nav>
+
+    <div class="text-center">
+    <h3>Elections Near You:</h3><br>
     {% for i in name %}
       {{i}} <br>
     {% endfor %} <br>
     </div>
     {% for i in vinfo %}
-    <div>
-      Election: {{i["election"]["name"]}} <br>
+    <div class="text-center">
+      <h3 class="election-name">Election: {{i["election"]["name"]}}</h3>
 
-      Polling Locations: <br>
+      <h4>Polling Locations:</h4>
       {% for j in i["pollingLocations"] %}
         {{ j["address"]["locationName"] }}<br>
         {{ j["address"]["line1"] }}, {{j["address"]["city"]}}, {{j["address"]["state"]}} , {{j["address"]["zip"]}} <br><br>
       {%endfor%}
 
-      Contests: <br>
+      <h4>Contests:</h4>
       {% for j in i["contests"] %}
       <div>
         {%if j["office"]%}
-          Office:
-          {{ j["office"] }} <br>
+          <h5 class="election-office">Office:
+          {{ j["office"] }}</h5>
           District:
-          {{ j["district"]["name"] }} <br>
+          {{ j["district"]["name"] }} <br><br>
           Candidates: <br>
-          <div>
-          {% for k in j["candidates"] %}
-            Name: {{k["name"]}} <br>
-            Party: {{k["party"]}} <br>
-            {% if k["candidateUrl"]%}
-              <a href = {{k["candidateUrl"]}}> More Info </a> <br>
-            {%endif%}
-            <br>
+          <div class="grid-x">
+            {% for k in j["candidates"] %}
+              <div class="text-center cell small-3">
+              Name: {{k["name"]}} <br>
+              Party: {{k["party"]}} <br>
+              {% if k["candidateUrl"]%}
+                <a href = {{k["candidateUrl"]}}> More Info </a> <br>
+              {%endif%}
+              </div>
+            {%endfor%}
           </div>
-          {%endfor%}
         {%endif%}
       </div>
       {%endfor%}
