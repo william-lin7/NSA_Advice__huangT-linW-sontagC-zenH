@@ -2,12 +2,11 @@
 #huangT, linW, sontagC, zenH
 #SoftDev1 pd2
 #P #01: ArRESTed Development
-#2019-11-2-
+#2019-12-04
 
 from flask import Flask, render_template, request,  session, redirect, url_for, flash
 import sqlite3
 import urllib, json
-import api #helper functions found in api.py
 import db as dbase  #helper functions found in db.py
 app = Flask(__name__)
 app = Flask(__name__)
@@ -21,7 +20,6 @@ def root():
     if 'user' in session:
         return redirect(url_for("home"))
     else:
-        #flash(api.getIP()) #Coby debug statement
         return render_template("index.html")
 
 @app.route("/login", methods = ["POST", "GET"])
@@ -39,11 +37,11 @@ def update():
 @app.route("/auth", methods = ["POST"]) #This route authenticates registration and log in, and other updates
 def auth():
     if request.form['submit_button'] == "Sign me up": #If you were sent here by registering
-        if dbase.addUser(): #@tyler when is user added to session? #adds user data to our db
+        if dbase.addUser():
             return redirect(url_for("root"))
         else:
             return redirect(url_for("register")) #if addUser() returns false, it will also handle flashing the correct error message
-    if request.form['submit_button'] == "Login": #if sent here by lgging in
+    if request.form['submit_button'] == "Login": #if sent here by logging in
         if dbase.login():
             session['user'] = request.form['username'] #stores the user in the session
             dbase.fillUserInfo(userInfo) #gives easy access to user information via userInfo variable
@@ -71,7 +69,7 @@ def logout():
 def home(): #display home page of website
     if 'user' in session:
         dbase.fillUserInfo(userInfo) #grabs user info
-        key = dbase.getAPIKey('locationIQ')
+        key = dbase.getAPIKey('locationIQ') #getting the lat and long of the address field for google maps
         url = "https://us1.locationiq.com/v1/search.php?key={}&q={}&format=json"
         lat = 0
         lon = 0
@@ -97,9 +95,9 @@ def home(): #display home page of website
             flash("Address required for map. Please enter an address")
         return render_template(
             "homepage.html",
-            googleCivic = dbase.getAPIKey("googleCivic"),
+            googleCloud = dbase.getAPIKey("googleCloud"),
             openWeather = dbase.getAPIKey("openWeather"),
-            mapkey = dbase.getAPIKey('googleMaps'),
+            locIQ = dbase.getAPIKey("locationIQ"),
             user = userInfo['username'],
             name = userInfo['firstName'] + " " + userInfo['lastName'],
             loc = userInfo['location'],
@@ -158,7 +156,7 @@ def weather():
 
 @app.route("/elections") #renders separate page with election (local) data
 def elections():
-    key = dbase.getAPIKey('googleCivic')
+    key = dbase.getAPIKey('googleCloud')
     #Address Format:
     #345%20Chamber%20St.%20NewYork%20City%20NY
     urlelections = "https://www.googleapis.com/civicinfo/v2/elections?key={}&address={}"
@@ -202,7 +200,7 @@ def elections():
 
 @app.route("/representatives") #separate page with political officials
 def representatives():
-    key = dbase.getAPIKey('googleCivic')
+    key = dbase.getAPIKey('googleCloud')
     if key == "":
         flash("Error! Missing API Key")
         return redirect(url_for(root))
@@ -232,11 +230,10 @@ def representatives():
         return redirect(url_for("home"))
 
 
-@app.route("/places/<plc>")
+@app.route("/places/<plc>") #renders a page with the selected choice of places near the user's address
 def places(plc):
     key = dbase.getAPIKey('locationIQ')
-    #key2 = dbase.getAPIKey('googleCivic')
-    key2 = "AIzaSyA4Rb84cl3x6kVw6AZuPrhQgP9teGyPN6A"
+    key2 = dbase.getAPIKey('googleCloud')
     if key == "":
         flash("Error! Missing API Key")
         return redirect(url_for("root"))
@@ -271,14 +268,13 @@ def places(plc):
         flash("Address required. Please enter an address")
         return redirect(url_for("home"))
 
-@app.route("/keys")
+@app.route("/keys") #renders a page with info about a user's keys and to update/add key
 def keys():
     if 'user' in session:
         return render_template("keys.html",
                                 owkey = dbase.getAPIKey('openWeather'),
-                                gckey = dbase.getAPIKey('googleCivic'),
-                                lqkey = dbase.getAPIKey('locationiq'),
-                                gmkey = dbase.getAPIKey('googleMaps'))
+                                gckey = dbase.getAPIKey('googleCloud'),
+                                lqkey = dbase.getAPIKey('locationiq'))
     else:
         return redirect(url_for("root"))
 

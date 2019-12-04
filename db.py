@@ -3,7 +3,7 @@ import sqlite3 # enable control of an sqlite database
 
 userID = -1
 
-def addUser():
+def addUser(): #adds user to database
     if request.form['password'] != request.form['password2']:
         flash("Error! Passwords do not match")
         return False
@@ -14,21 +14,21 @@ def addUser():
         command = "SELECT COUNT(*) FROM users WHERE username = \"{}\";"
         newUser = c.execute(command.format(request.form['username'])) #execution of sqlite command with the given username instead of the brackets
         for bar in newUser:
-            if bar[0] > 0:
+            if bar[0] > 0: #if username exists
                 flash("Username is already taken. Please choose another one.")
                 return False
             else:
                 id = getTableLen("users") #gives the user the next availabe id
                 c.execute("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?);", (id, request.form['username'], request.form['password'], request.form['firstName'], request.form['lastName'], "", "")) #different version of format
                 db.commit()
-                c.execute("INSERT INTO apiKeys VALUES(?, ?, ?, ?, ?);", (id, "", "", "", ""))
+                c.execute("INSERT INTO apiKeys VALUES(?, ?, ?, ?);", (id, "", "", ""))
                 db.commit()
                 db.close()
                 flash("Register Success!")
-                flash("index") #Why flash index?
+                flash("index")
                 return True
 
-def login():
+def login(): #login function
     global userID
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
@@ -40,17 +40,17 @@ def login():
         getPass = "SELECT password FROM users WHERE username = \"{}\";"
         listPass = c.execute(getPass.format(bar[0][1][1]))
         for p in listPass:
-            if request.form['password'] == p[0]: #correct username and password
+            if request.form['password'] == p[0]: #compare passwords
                 userID = bar[0][1][0]
                 return True
             else:
                 flash("Error! Incorrect password")
                 return False
     else:
-        flash("Error! Incorrect username")
+        flash("Error! Username does not exist")
         return False
 
-def update():
+def update(): #updates a user's info based on the info provided
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
@@ -80,7 +80,7 @@ def getTableLen(tbl): #returns the length of a table
     for line in q:
         return line[0]
 
-def fillUserInfo(arr):
+def fillUserInfo(arr): #@param arr is an array and fills this array with info on the current user
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
@@ -92,11 +92,11 @@ def fillUserInfo(arr):
         arr['location'] = bar[5]
         arr['address'] = bar[6]
 
-def updateAPIKey(button):
+def updateAPIKey(button): #@param button determines which API to get updated
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
     c = db.cursor()
-    arr = ['openWeather', 'googleCivic', 'locationIQ', 'googleMaps']
+    arr = ['openWeather', 'googleCloud', 'locationIQ']
     idx = 0
     blank = True
     while idx < len(arr):
@@ -116,7 +116,7 @@ def updateAPIKey(button):
     db.commit()
     db.close()
 
-def getAPIKey(api):
+def getAPIKey(api): #@param api is which api key to retrieve from the database
     key = ''
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)

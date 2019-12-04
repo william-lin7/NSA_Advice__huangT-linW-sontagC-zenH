@@ -180,3 +180,7 @@ williamL -- 2019-12-03 19:30
 williamL -- 2019-12-03 20:15
   - got dropdown menu to work and each button shows places of that certain type near you
   - created a google doc on Google Places API
+
+tylerH -- 2019-12-03 21:00
+  - combined all the google api keys into one called google cloud
+  - added comments
