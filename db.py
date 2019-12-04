@@ -14,7 +14,7 @@ def addUser(): #adds user to database
         command = "SELECT COUNT(*) FROM users WHERE username = \"{}\";"
         newUser = c.execute(command.format(request.form['username'])) #execution of sqlite command with the given username instead of the brackets
         for bar in newUser:
-            if bar[0] > 0:
+            if bar[0] > 0: #if username exists
                 flash("Username is already taken. Please choose another one.")
                 return False
             else:
@@ -28,7 +28,7 @@ def addUser(): #adds user to database
                 flash("index")
                 return True
 
-def login(): #compares login credentials, then logs in if they are correct
+def login(): #login function
     global userID
     dbfile = "data.db"
     db = sqlite3.connect(dbfile)
@@ -40,7 +40,7 @@ def login(): #compares login credentials, then logs in if they are correct
         getPass = "SELECT password FROM users WHERE username = \"{}\";"
         listPass = c.execute(getPass.format(bar[0][1][1]))
         for p in listPass:
-            if request.form['password'] == p[0]: #correct username and password
+            if request.form['password'] == p[0]: #compare passwords
                 userID = bar[0][1][0]
                 return True
             else:
