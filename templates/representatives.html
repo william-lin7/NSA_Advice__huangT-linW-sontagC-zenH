@@ -10,7 +10,7 @@
     <title>Civic Info</title>
   </head>
   <body>
-    Representatives in your area: <br><br>
+    <div><h3>Representatives in your area: </h3></div><br>
     {% for person in reps %}
       Name: {{person["name"]}}<br>
       Address: {%for i in person["address"]%}

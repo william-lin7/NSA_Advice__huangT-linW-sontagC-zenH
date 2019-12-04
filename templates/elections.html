@@ -10,10 +10,11 @@
     <title>Civic Info</title>
   </head>
   <body>
-    Elections Near You: <br>
+    <div><h3>Elections Near You:</h3><br>
     {% for i in name %}
       {{i}} <br>
     {% endfor %} <br>
+    </div>
     {% for i in vinfo %}
       Election: {{i["election"]["name"]}} <br>
 
