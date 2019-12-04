@@ -11,9 +11,11 @@
   </head>
   <body>
     {% for element in info %}
+    <div>
       Name: {{element["name"]}}<br>
       Address: {{element["vicinity"]}}<br>
       Rating: {{element["rating"]}}<br><br>
+    </div>
     {% endfor %}
   </body>
 </html>

@@ -16,6 +16,7 @@
     {% endfor %} <br>
     </div>
     {% for i in vinfo %}
+    <div>
       Election: {{i["election"]["name"]}} <br>
 
       Polling Locations: <br>
@@ -26,12 +27,14 @@
 
       Contests: <br>
       {% for j in i["contests"] %}
+      <div>
         {%if j["office"]%}
           Office:
           {{ j["office"] }} <br>
           District:
           {{ j["district"]["name"] }} <br>
           Candidates: <br>
+          <div>
           {% for k in j["candidates"] %}
             Name: {{k["name"]}} <br>
             Party: {{k["party"]}} <br>
@@ -39,9 +42,12 @@
               <a href = {{k["candidateUrl"]}}> More Info </a> <br>
             {%endif%}
             <br>
-            {%endfor%}
-          {%endif%}
-        {%endfor%}
+          </div>
+          {%endfor%}
+        {%endif%}
+      </div>
       {%endfor%}
+    </div>
+    {%endfor%}
   </body>
 </html>
